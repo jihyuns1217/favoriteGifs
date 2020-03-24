@@ -9,21 +9,33 @@
 import UIKit
 
 class FirstViewController: UIViewController {
-
+    
     @IBOutlet weak var searchBar: UISearchBar!
+    private let searchController = UISearchController(searchResultsController: nil)
+    private let searchContainerView: UIView = UIView(frame: CGRect.zero)
+    
+    var gifs = [Gif]()
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        searchController.searchBar.frame = searchContainerView.bounds
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // 1. searchBar 붙이기
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(searchController.searchBar)
+        searchContainerView.translatesAutoresizingMaskIntoConstraints = false
+        searchContainerView.addSubview(searchController.searchBar)
         
+        searchContainerView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(searchContainerView)
         NSLayoutConstraint.activate([
-            self.view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: searchController.searchBar.topAnchor),
-            self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: searchController.searchBar.leadingAnchor),
-            self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: searchController.searchBar.trailingAnchor)
+            self.view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: self.searchContainerView.topAnchor),
+            self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: self.searchContainerView.leadingAnchor),
+            self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: self.searchContainerView.trailingAnchor),
+            self.searchContainerView.heightAnchor.constraint(equalToConstant: 44)
         ])
         
         // 2. collectionView 붙이기
@@ -32,7 +44,7 @@ class FirstViewController: UIViewController {
         self.view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: searchController.searchBar.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: searchContainerView.bottomAnchor),
             self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
             self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
             self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor)
