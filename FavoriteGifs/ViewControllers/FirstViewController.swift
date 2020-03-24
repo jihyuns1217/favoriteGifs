@@ -54,15 +54,24 @@ class FirstViewController: UIViewController {
         searchController.searchResultsUpdater = self
         
     }
-
-
+    
+    
 }
 
 extension FirstViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        // TODO: 지현 - API 호출
-        
-        
+        guard let searchText = searchController.searchBar.text, searchText.count > 0 else {
+            return
+        }
+        Gif.gifs(query: searchText) { (result) in
+            switch result {
+            case .success(let gifs):
+                print(">>>> \(gifs.count)")
+            case .failure(let error):
+                let alertController = UIAlertController(title: NSLocalizedString("네트워크 오류", comment: ""), message: error.localizedDescription, preferredStyle: .alert)
+                self.present(alertController, animated: true)
+            }
+        }
     }
 }
 
