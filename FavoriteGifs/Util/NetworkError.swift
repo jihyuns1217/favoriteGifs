@@ -10,4 +10,5 @@ import Foundation
 
 enum NetworkError: Error {
     case extra
+    case invalidData
 }

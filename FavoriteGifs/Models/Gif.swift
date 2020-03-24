@@ -8,8 +8,11 @@
 
 import Foundation
 
-struct Gif: Codable {
-    
+struct Gif {
+    let id: String
+    let url: URL
+    let height: Int
+    let width: Int
 }
 
 extension Gif {
@@ -31,7 +34,34 @@ extension Gif {
             }
             
             do {
-                let gifs = try JSONDecoder().decode([Gif].self, from: data)
+                guard let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                    , let rawGifs = jsonObject["data"] as? [[String: Any]] else {
+                        completion(.failure(error ?? NetworkError.invalidData))
+                        return
+                }
+                
+                var gifs = [Gif]()
+                for rawGif in rawGifs {
+                    guard let id = rawGif["id"] as? String
+                        , let images = rawGif["images"] as? [String: Any]
+                        , let fixedWidthDownsampled = images["fixed_width_downsampled"] as? [String: Any]
+                        , let urlString = fixedWidthDownsampled["url"] as? String
+                        , let url = URL(string: urlString)
+                        , let widthString = fixedWidthDownsampled["width"] as? String
+                        , let heightString = fixedWidthDownsampled["height"] as? String
+                        , let width = Int(widthString)
+                        , let height = Int(heightString) else {
+                            completion(.failure(error ?? NetworkError.invalidData))
+                            return
+                    }
+                    
+                    
+                    
+                    let gif = Gif(id: id, url: url, height: height, width: width)
+                    gifs.append(gif)
+                }
+                
+                
                 completion(.success(gifs))
             } catch {
                 completion(.failure(error))
