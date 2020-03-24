@@ -17,6 +17,8 @@
 		BA513937242107F800044D6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA513935242107F800044D6A /* LaunchScreen.storyboard */; };
 		BA513942242107F800044D6A /* FavoriteGifsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA513941242107F800044D6A /* FavoriteGifsTests.swift */; };
 		BA51394D242107F800044D6A /* FavoriteGifsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA51394C242107F800044D6A /* FavoriteGifsUITests.swift */; };
+		BAC09926242A2AB2004D2F96 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC09925242A2AB2004D2F96 /* Gif.swift */; };
+		BAC09929242A3160004D2F96 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC09928242A3160004D2F96 /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		BA513948242107F800044D6A /* FavoriteGifsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FavoriteGifsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA51394C242107F800044D6A /* FavoriteGifsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGifsUITests.swift; sourceTree = "<group>"; };
 		BA51394E242107F800044D6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BAC09925242A2AB2004D2F96 /* Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
+		BAC09928242A3160004D2F96 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,8 @@
 		BA513924242107F500044D6A /* FavoriteGifs */ = {
 			isa = PBXGroup;
 			children = (
+				BAC09927242A3147004D2F96 /* Util */,
+				BAC09924242A2A25004D2F96 /* Models */,
 				BA513925242107F500044D6A /* AppDelegate.swift */,
 				BA513927242107F500044D6A /* SceneDelegate.swift */,
 				BA513929242107F500044D6A /* FirstViewController.swift */,
@@ -132,6 +138,22 @@
 				BA51394E242107F800044D6A /* Info.plist */,
 			);
 			path = FavoriteGifsUITests;
+			sourceTree = "<group>";
+		};
+		BAC09924242A2A25004D2F96 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BAC09925242A2AB2004D2F96 /* Gif.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BAC09927242A3147004D2F96 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				BAC09928242A3160004D2F96 /* NetworkError.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +289,8 @@
 			files = (
 				BA51392C242107F500044D6A /* SecondViewController.swift in Sources */,
 				BA51392A242107F500044D6A /* FirstViewController.swift in Sources */,
+				BAC09929242A3160004D2F96 /* NetworkError.swift in Sources */,
+				BAC09926242A2AB2004D2F96 /* Gif.swift in Sources */,
 				BA513926242107F500044D6A /* AppDelegate.swift in Sources */,
 				BA513928242107F500044D6A /* SceneDelegate.swift in Sources */,
 				BA513932242107F500044D6A /* FavoriteGifs.xcdatamodeld in Sources */,
