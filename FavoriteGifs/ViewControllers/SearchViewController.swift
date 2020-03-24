@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  SearchViewController.swift
 //  FavoriteGifs
 //
 //  Created by Jihyun Son on 2020/03/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class SearchViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     private let searchController = UISearchController(searchResultsController: nil)
@@ -58,7 +58,7 @@ class FirstViewController: UIViewController {
     
 }
 
-extension FirstViewController: UISearchResultsUpdating {
+extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text, searchText.count > 0 else {
             return
@@ -66,7 +66,7 @@ extension FirstViewController: UISearchResultsUpdating {
         Gif.gifs(query: searchText) { (result) in
             switch result {
             case .success(let gifs):
-                print(">>>> \(gifs.count)")
+                self.gifs = gifs
             case .failure(let error):
                 let alertController = UIAlertController(title: NSLocalizedString("네트워크 오류", comment: ""), message: error.localizedDescription, preferredStyle: .alert)
                 self.present(alertController, animated: true)

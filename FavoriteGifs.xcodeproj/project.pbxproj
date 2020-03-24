@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		BA513926242107F500044D6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA513925242107F500044D6A /* AppDelegate.swift */; };
 		BA513928242107F500044D6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA513927242107F500044D6A /* SceneDelegate.swift */; };
-		BA51392A242107F500044D6A /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA513929242107F500044D6A /* FirstViewController.swift */; };
+		BA51392A242107F500044D6A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA513929242107F500044D6A /* SearchViewController.swift */; };
 		BA51392C242107F500044D6A /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA51392B242107F500044D6A /* SecondViewController.swift */; };
 		BA51392F242107F500044D6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA51392D242107F500044D6A /* Main.storyboard */; };
 		BA513932242107F500044D6A /* FavoriteGifs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA513930242107F500044D6A /* FavoriteGifs.xcdatamodeld */; };
@@ -43,7 +43,7 @@
 		BA513922242107F500044D6A /* FavoriteGifs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FavoriteGifs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA513925242107F500044D6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA513927242107F500044D6A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BA513929242107F500044D6A /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		BA513929242107F500044D6A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		BA51392B242107F500044D6A /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		BA51392E242107F500044D6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BA513931242107F500044D6A /* FavoriteGifs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteGifs.xcdatamodel; sourceTree = "<group>"; };
@@ -169,7 +169,7 @@
 		BAC0992D242A3689004D2F96 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				BA513929242107F500044D6A /* FirstViewController.swift */,
+				BA513929242107F500044D6A /* SearchViewController.swift */,
 				BA51392B242107F500044D6A /* SecondViewController.swift */,
 			);
 			path = ViewControllers;
@@ -307,7 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA51392C242107F500044D6A /* SecondViewController.swift in Sources */,
-				BA51392A242107F500044D6A /* FirstViewController.swift in Sources */,
+				BA51392A242107F500044D6A /* SearchViewController.swift in Sources */,
 				BAC09929242A3160004D2F96 /* NetworkError.swift in Sources */,
 				BAC09926242A2AB2004D2F96 /* Gif.swift in Sources */,
 				BA513926242107F500044D6A /* AppDelegate.swift in Sources */,
