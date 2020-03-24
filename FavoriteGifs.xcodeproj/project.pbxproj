@@ -19,6 +19,7 @@
 		BA51394D242107F800044D6A /* FavoriteGifsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA51394C242107F800044D6A /* FavoriteGifsUITests.swift */; };
 		BAC09926242A2AB2004D2F96 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC09925242A2AB2004D2F96 /* Gif.swift */; };
 		BAC09929242A3160004D2F96 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC09928242A3160004D2F96 /* NetworkError.swift */; };
+		BAC0992C242A366B004D2F96 /* DynamicHeightCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC0992B242A366B004D2F96 /* DynamicHeightCollectionViewLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		BA51394E242107F800044D6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAC09925242A2AB2004D2F96 /* Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		BAC09928242A3160004D2F96 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		BAC0992B242A366B004D2F96 /* DynamicHeightCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightCollectionViewLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,10 +111,10 @@
 			children = (
 				BAC09927242A3147004D2F96 /* Util */,
 				BAC09924242A2A25004D2F96 /* Models */,
+				BAC0992A242A3648004D2F96 /* Views */,
+				BAC0992D242A3689004D2F96 /* ViewControllers */,
 				BA513925242107F500044D6A /* AppDelegate.swift */,
 				BA513927242107F500044D6A /* SceneDelegate.swift */,
-				BA513929242107F500044D6A /* FirstViewController.swift */,
-				BA51392B242107F500044D6A /* SecondViewController.swift */,
 				BA51392D242107F500044D6A /* Main.storyboard */,
 				BA513933242107F800044D6A /* Assets.xcassets */,
 				BA513935242107F800044D6A /* LaunchScreen.storyboard */,
@@ -154,6 +156,23 @@
 				BAC09928242A3160004D2F96 /* NetworkError.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		BAC0992A242A3648004D2F96 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BAC0992B242A366B004D2F96 /* DynamicHeightCollectionViewLayout.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BAC0992D242A3689004D2F96 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BA513929242107F500044D6A /* FirstViewController.swift */,
+				BA51392B242107F500044D6A /* SecondViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +311,7 @@
 				BAC09929242A3160004D2F96 /* NetworkError.swift in Sources */,
 				BAC09926242A2AB2004D2F96 /* Gif.swift in Sources */,
 				BA513926242107F500044D6A /* AppDelegate.swift in Sources */,
+				BAC0992C242A366B004D2F96 /* DynamicHeightCollectionViewLayout.swift in Sources */,
 				BA513928242107F500044D6A /* SceneDelegate.swift in Sources */,
 				BA513932242107F500044D6A /* FavoriteGifs.xcdatamodeld in Sources */,
 			);
