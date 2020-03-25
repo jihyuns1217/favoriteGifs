@@ -34,6 +34,8 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = .systemBackground
+        
         // 1. collectionView 붙이기
         if let collectionViewLayout = collectionView.collectionViewLayout as? DynamicHeightCollectionViewLayout {
             collectionViewLayout.delegate = self
@@ -42,6 +44,7 @@ class SearchViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: GifCollectionViewCell.self))
         collectionView.dataSource = self
+        collectionView.delegate = self
         self.view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
@@ -52,17 +55,11 @@ class SearchViewController: UIViewController {
         ])
         
         // 2. searchBar 붙이기
-        // 3. searchResultUpdate 설정
         searchController.searchResultsUpdater = self
-        // 2
         searchController.obscuresBackgroundDuringPresentation = false
-        // 3
         searchController.searchBar.placeholder = "Search Gifs"
-        // 4
         navigationItem.searchController = searchController
-        // 5
         definesPresentationContext = true
-        
     }
     
     
@@ -92,7 +89,8 @@ extension SearchViewController: UISearchResultsUpdating {
     }
 }
 
-extension SearchViewController: UICollectionViewDataSource {
+// MARK: - UICollectionView
+extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return gifs.count
     }
@@ -115,6 +113,13 @@ extension SearchViewController: UICollectionViewDataSource {
         }.resume()
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailViewController = DetailViewController()
+        detailViewController.gif = gifs[indexPath.item]
+        
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 
