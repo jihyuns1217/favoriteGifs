@@ -14,6 +14,8 @@ class DetailViewController: UIViewController {
     
     var gif: Gif!
     
+    private var fetchedGifs = [FavoriteGif]()
+    
     override func viewDidLoad() {
         self.view.backgroundColor = .systemBackground
         
@@ -44,20 +46,40 @@ class DetailViewController: UIViewController {
         }.resume()
         
         
-        let heartOff = "🤍"
-        let heartOn = "❤️"
+        let moc = DataController.shared.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteGif")
+        fetchRequest.predicate = NSPredicate(format: "id == %@", gif.id)
+         
+        var heart = "🤍"
+        do {
+            fetchedGifs = try moc.fetch(fetchRequest) as! [FavoriteGif]
+            if !fetchedGifs.isEmpty {
+                heart = "❤️"
+            }
+        } catch {
+            fatalError("Failed to fetch favorite gifs: \(error)")
+        }
         
-        let button = UIBarButtonItem(title: heartOff, style: .plain, target: self, action: #selector(didSelectHeart))
+        let button = UIBarButtonItem(title: heart, style: .plain, target: self, action: #selector(didSelectHeart))
         navigationItem.setRightBarButton(button, animated: true)
     }
     
     @objc private func didSelectHeart() {
-        let favoriteGif = NSEntityDescription.insertNewObject(forEntityName: String(describing: FavoriteGif.self), into: DataController.shared.persistentContainer.viewContext) as! FavoriteGif
-        favoriteGif.id = gif.id
-        favoriteGif.url = gif.url
-        favoriteGif.aspectRatio = Float(gif.aspectRatio)
+        if navigationItem.rightBarButtonItem!.title == "🤍" {
+            let favoriteGif = NSEntityDescription.insertNewObject(forEntityName: String(describing: FavoriteGif.self), into: DataController.shared.persistentContainer.viewContext) as! FavoriteGif
+            favoriteGif.id = gif.id
+            favoriteGif.url = gif.url
+            favoriteGif.aspectRatio = Float(gif.aspectRatio)
+        } else {
+            for gif in fetchedGifs {
+                DataController.shared.persistentContainer.viewContext.delete(gif)
+            }
+            fetchedGifs.removeAll()
+        }
+        
         DataController.shared.saveContext()
         
+        navigationItem.rightBarButtonItem!.title = navigationItem.rightBarButtonItem!.title == "🤍" ? "❤️" : "🤍"
     }
     
 }
