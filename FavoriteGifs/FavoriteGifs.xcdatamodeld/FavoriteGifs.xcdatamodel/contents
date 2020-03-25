@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="FavoriteGif" representedClassName="FavoriteGif" syncable="YES">
-        <attribute name="aspectRatio" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="url" optional="YES" attributeType="URI"/>
+        <attribute name="aspectRatio" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="url" attributeType="URI" defaultValueString="https://media1.giphy.com/media/y1ZBcOGOOtlpC/200_s.gif?cid=cde4eab86e192d28bbc98487fdbbb37687dee41a35e84646&amp;rid=200_s.gif"/>
     </entity>
     <elements>
         <element name="FavoriteGif" positionX="-54" positionY="-9" width="128" height="88"/>

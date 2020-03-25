@@ -18,7 +18,7 @@ extension FavoriteGif {
     }
 
     @NSManaged public var aspectRatio: Float
-    @NSManaged public var id: String?
-    @NSManaged public var url: URL?
+    @NSManaged public var id: String
+    @NSManaged public var url: URL
 
 }
