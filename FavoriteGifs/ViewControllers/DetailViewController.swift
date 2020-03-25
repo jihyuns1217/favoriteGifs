@@ -15,6 +15,8 @@ class DetailViewController: UIViewController {
     var gif: Gif!
     
     private var fetchedGifs = [FavoriteGif]()
+    private let heartOff = "🤍"
+    private let heartOn = "❤️"
     
     override func viewDidLoad() {
         self.view.backgroundColor = .systemBackground
@@ -50,11 +52,11 @@ class DetailViewController: UIViewController {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteGif")
         fetchRequest.predicate = NSPredicate(format: "id == %@", gif.id)
          
-        var heart = "🤍"
+        var heart = heartOff
         do {
             fetchedGifs = try moc.fetch(fetchRequest) as! [FavoriteGif]
             if !fetchedGifs.isEmpty {
-                heart = "❤️"
+                heart = heartOn
             }
         } catch {
             fatalError("Failed to fetch favorite gifs: \(error)")
@@ -65,21 +67,23 @@ class DetailViewController: UIViewController {
     }
     
     @objc private func didSelectHeart() {
-        if navigationItem.rightBarButtonItem!.title == "🤍" {
+        if navigationItem.rightBarButtonItem!.title == heartOff {
             let favoriteGif = NSEntityDescription.insertNewObject(forEntityName: String(describing: FavoriteGif.self), into: DataController.shared.persistentContainer.viewContext) as! FavoriteGif
             favoriteGif.id = gif.id
             favoriteGif.url = gif.url
             favoriteGif.aspectRatio = Float(gif.aspectRatio)
+            
+            navigationItem.rightBarButtonItem!.title = heartOn
         } else {
             for gif in fetchedGifs {
                 DataController.shared.persistentContainer.viewContext.delete(gif)
             }
             fetchedGifs.removeAll()
+            
+            navigationItem.rightBarButtonItem!.title = heartOff
         }
         
         DataController.shared.saveContext()
-        
-        navigationItem.rightBarButtonItem!.title = navigationItem.rightBarButtonItem!.title == "🤍" ? "❤️" : "🤍"
     }
     
 }
