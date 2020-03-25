@@ -35,6 +35,7 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = .systemBackground
+        collectionView.backgroundColor = .systemBackground
         
         // 1. collectionView 붙이기
         if let collectionViewLayout = collectionView.collectionViewLayout as? DynamicHeightCollectionViewLayout {
