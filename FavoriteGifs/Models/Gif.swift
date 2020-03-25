@@ -7,12 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
 struct Gif {
     let id: String
     let url: URL
-    let height: Int
-    let width: Int
+    let aspectRatio: CGFloat
 }
 
 extension Gif {
@@ -56,8 +56,8 @@ extension Gif {
                     }
                     
                     
-                    
-                    let gif = Gif(id: id, url: url, height: height, width: width)
+                    let aspectRatio: CGFloat = CGFloat(height / width)
+                    let gif = Gif(id: id, url: url, aspectRatio: aspectRatio)
                     gifs.append(gif)
                 }
                 

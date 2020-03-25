@@ -10,11 +10,20 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
-    @IBOutlet weak var searchBar: UISearchBar!
     private let searchController = UISearchController(searchResultsController: nil)
     private let searchContainerView: UIView = UIView(frame: CGRect.zero)
+    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     var gifs = [Gif]()
+    
+    private var searchCoalesceTimer: Timer? {
+        willSet {
+            if searchCoalesceTimer?.isValid == true
+            {
+                searchCoalesceTimer?.invalidate()
+            }
+        }
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -25,33 +34,30 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 1. searchBar 붙이기
-        searchContainerView.translatesAutoresizingMaskIntoConstraints = false
-        searchContainerView.addSubview(searchController.searchBar)
-        
-        searchContainerView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(searchContainerView)
-        NSLayoutConstraint.activate([
-            self.view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: self.searchContainerView.topAnchor),
-            self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: self.searchContainerView.leadingAnchor),
-            self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: self.searchContainerView.trailingAnchor),
-            self.searchContainerView.heightAnchor.constraint(equalToConstant: 44)
-        ])
-        
-        // 2. collectionView 붙이기
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
+        // 1. collectionView 붙이기
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: GifCollectionViewCell.self))
+        collectionView.dataSource = self
         self.view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: searchContainerView.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
             self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
-            self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor)
         ])
         
+        // 2. searchBar 붙이기
         // 3. searchResultUpdate 설정
         searchController.searchResultsUpdater = self
+        // 2
+        searchController.obscuresBackgroundDuringPresentation = false
+        // 3
+        searchController.searchBar.placeholder = "Search Gifs"
+        // 4
+        navigationItem.searchController = searchController
+        // 5
+        definesPresentationContext = true
         
     }
     
@@ -63,15 +69,61 @@ extension SearchViewController: UISearchResultsUpdating {
         guard let searchText = searchController.searchBar.text, searchText.count > 0 else {
             return
         }
-        Gif.gifs(query: searchText) { (result) in
-            switch result {
-            case .success(let gifs):
-                self.gifs = gifs
-            case .failure(let error):
-                let alertController = UIAlertController(title: NSLocalizedString("네트워크 오류", comment: ""), message: error.localizedDescription, preferredStyle: .alert)
-                self.present(alertController, animated: true)
+        
+        searchCoalesceTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [unowned self] _ in
+            Gif.gifs(query: searchText) { (result) in
+                switch result {
+                case .success(let gifs):
+                    self.gifs = gifs
+                    
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
+                case .failure(let error):
+                    let alertController = UIAlertController(title: NSLocalizedString("네트워크 오류", comment: ""), message: error.localizedDescription, preferredStyle: .alert)
+                    self.present(alertController, animated: true)
+                }
             }
-        }
+        })
+    }
+}
+
+extension SearchViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return gifs.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: GifCollectionViewCell.self), for: indexPath) as! GifCollectionViewCell
+        
+        URLSession.shared.dataTask(with: gifs[indexPath.item].url) { (data, response, error) in
+            if error != nil {
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                cell.imageView.image = UIImage(data: data!)
+            }
+        }.resume()
+        
+        return cell
+    }
+    
+    
+}
+
+// MARK: - DynamicHeightCollectionViewLayout
+extension SearchViewController: DynamicHeightCollectionViewLayoutDelegate {
+    
+    public func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat
+    {
+        let height = width * gifs[indexPath.item].aspectRatio
+        
+        return height
     }
 }
 
