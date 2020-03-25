@@ -12,7 +12,7 @@ class SearchViewController: UIViewController {
     
     private let searchController = UISearchController(searchResultsController: nil)
     private let searchContainerView: UIView = UIView(frame: CGRect.zero)
-    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
     
     var gifs = [Gif]()
     
@@ -35,6 +35,10 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         // 1. collectionView 붙이기
+        if let collectionViewLayout = collectionView.collectionViewLayout as? DynamicHeightCollectionViewLayout {
+            collectionViewLayout.delegate = self
+        }
+        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: GifCollectionViewCell.self))
         collectionView.dataSource = self
@@ -112,15 +116,12 @@ extension SearchViewController: UICollectionViewDataSource {
         
         return cell
     }
-    
-    
 }
 
 // MARK: - DynamicHeightCollectionViewLayout
 extension SearchViewController: DynamicHeightCollectionViewLayoutDelegate {
     
-    public func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat
-    {
+     func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
         let height = width * gifs[indexPath.item].aspectRatio
         
         return height

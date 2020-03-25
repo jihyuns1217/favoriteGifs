@@ -48,14 +48,13 @@ extension Gif {
                         , let urlString = fixedWidthDownsampled["url"] as? String
                         , let url = URL(string: urlString)
                         , let widthString = fixedWidthDownsampled["width"] as? String
-                        , let heightString = fixedWidthDownsampled["height"] as? String
-                        , let width = Int(widthString)
-                        , let height = Int(heightString) else {
+                        , let heightString = fixedWidthDownsampled["height"] as? String else {
                             completion(.failure(error ?? NetworkError.invalidData))
                             return
                     }
                     
-                    
+                    let width = NSString(string: widthString).floatValue
+                    let height = NSString(string: heightString).floatValue
                     let aspectRatio: CGFloat = CGFloat(height / width)
                     let gif = Gif(id: id, url: url, aspectRatio: aspectRatio)
                     gifs.append(gif)

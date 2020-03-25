@@ -10,6 +10,10 @@ import UIKit
 
 class GifCollectionViewCell: UICollectionViewCell {
     var imageView: UIImageView!
+    
+    override func prepareForReuse() {
+        imageView.image = nil
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
