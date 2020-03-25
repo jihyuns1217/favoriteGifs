@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class DetailViewController: UIViewController {
     private var imageView: UIImageView!
     
     var gif: Gif!
-
+    
     override func viewDidLoad() {
         self.view.backgroundColor = .systemBackground
         
@@ -41,6 +42,22 @@ class DetailViewController: UIViewController {
                 self.imageView.image = UIImage(data: data!)
             }
         }.resume()
+        
+        
+        let heartOff = "🤍"
+        let heartOn = "❤️"
+        
+        let button = UIBarButtonItem(title: heartOff, style: .plain, target: self, action: #selector(didSelectHeart))
+        navigationItem.setRightBarButton(button, animated: true)
     }
-
+    
+    @objc private func didSelectHeart() {
+        let favoriteGif = NSEntityDescription.insertNewObject(forEntityName: String(describing: FavoriteGif.self), into: DataController.shared.persistentContainer.viewContext) as! FavoriteGif
+        favoriteGif.id = gif.id
+        favoriteGif.url = gif.url
+        favoriteGif.aspectRatio = Float(gif.aspectRatio)
+        DataController.shared.saveContext()
+        
+    }
+    
 }

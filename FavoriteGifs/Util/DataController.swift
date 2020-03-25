@@ -18,7 +18,7 @@ class DataController: NSObject {
     var persistentContainer: NSPersistentContainer
     
     private init(completionClosure: @escaping () -> ()) {
-        persistentContainer = NSPersistentContainer(name: "Beautable")
+        persistentContainer = NSPersistentContainer(name: "FavoriteGifs")
         persistentContainer.loadPersistentStores(completionHandler: {(description, error) in
             if let error = error {
                 fatalError("Failed to load Core Data Stack: \(error)")
