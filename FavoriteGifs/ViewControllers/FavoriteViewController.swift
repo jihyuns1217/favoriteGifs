@@ -70,6 +70,7 @@ class FavoriteViewController: UIViewController {
             try moc.execute(deleteRequest)
             try moc.save()
             
+            gifs.removeAll()
             collectionView.reloadData()
         } catch let error as NSError {
             fatalError("Failure to delete context: \(error)")
