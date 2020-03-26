@@ -15,8 +15,7 @@ class DetailViewController: UIViewController {
     var gif: Gif!
     
     private var fetchedGifs = [FavoriteGif]()
-    private let heartOff = "🤍"
-    private let heartOn = "❤️"
+    private var isFavorite = false
     
     override func viewDidLoad() {
         setUpView()
@@ -24,23 +23,27 @@ class DetailViewController: UIViewController {
     }
     
     @objc private func didSelectHeart() {
-        if navigationItem.rightBarButtonItem!.title == heartOff {
-            let favoriteGif = NSEntityDescription.insertNewObject(forEntityName: String(describing: FavoriteGif.self), into: DataController.shared.persistentContainer.viewContext) as! FavoriteGif
-            favoriteGif.id = gif.id
-            favoriteGif.url = gif.url
-            favoriteGif.aspectRatio = Float(gif.aspectRatio)
-            
-            navigationItem.rightBarButtonItem!.title = heartOn
-        } else {
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        
+        if isFavorite {
             for gif in fetchedGifs {
                 DataController.shared.persistentContainer.viewContext.delete(gif)
             }
             fetchedGifs.removeAll()
             
-            navigationItem.rightBarButtonItem!.title = heartOff
+        } else {
+            let favoriteGif = NSEntityDescription.insertNewObject(forEntityName: String(describing: FavoriteGif.self), into: DataController.shared.persistentContainer.viewContext) as! FavoriteGif
+            favoriteGif.id = gif.id
+            favoriteGif.url = gif.url
+            favoriteGif.aspectRatio = Float(gif.aspectRatio)
         }
         
         DataController.shared.saveContext()
+        
+        isFavorite.toggle()
+        navigationItem.rightBarButtonItem?.image = heartImage()
+        
+        navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
     private func setUpView() {
@@ -79,18 +82,22 @@ class DetailViewController: UIViewController {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteGif")
         fetchRequest.predicate = NSPredicate(format: "id == %@", gif.id)
         
-        var heart = heartOff
+        isFavorite = false
         do {
             fetchedGifs = try moc.fetch(fetchRequest) as! [FavoriteGif]
             if !fetchedGifs.isEmpty {
-                heart = heartOn
+                isFavorite = true
             }
         } catch {
             fatalError("Failed to fetch favorite gifs: \(error)")
         }
         
-        let button = UIBarButtonItem(title: heart, style: .plain, target: self, action: #selector(didSelectHeart))
-        navigationItem.setRightBarButton(button, animated: true)
+        let heartButton = UIBarButtonItem(image: heartImage(), style: .plain, target: self, action: #selector(didSelectHeart))
+        navigationItem.setRightBarButton(heartButton, animated: true)
+    }
+    
+    private func heartImage() -> UIImage? {
+        return isFavorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
     }
     
 }
