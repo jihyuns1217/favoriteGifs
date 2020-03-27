@@ -23,6 +23,8 @@
 		BAC09929242A3160004D2F96 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC09928242A3160004D2F96 /* NetworkError.swift */; };
 		BAC0992C242A366B004D2F96 /* DynamicHeightCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC0992B242A366B004D2F96 /* DynamicHeightCollectionViewLayout.swift */; };
 		BAC0B90A242E440100B6FEBC /* Pagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC0B909242E440100B6FEBC /* Pagination.swift */; };
+		BAC0B90C242E4CF700B6FEBC /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC0B90B242E4CF700B6FEBC /* UIImage+Extensions.swift */; };
+		BAC0B90E242E4E2300B6FEBC /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC0B90D242E4E2300B6FEBC /* UIImageView+Extensions.swift */; };
 		BAED0431242BA9E600DCA115 /* FavoriteGif+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED042F242BA9E600DCA115 /* FavoriteGif+CoreDataClass.swift */; };
 		BAED0432242BA9E600DCA115 /* FavoriteGif+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED0430242BA9E600DCA115 /* FavoriteGif+CoreDataProperties.swift */; };
 		BAED0434242BAA2800DCA115 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED0433242BAA2800DCA115 /* DataController.swift */; };
@@ -68,6 +70,8 @@
 		BAC09928242A3160004D2F96 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		BAC0992B242A366B004D2F96 /* DynamicHeightCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightCollectionViewLayout.swift; sourceTree = "<group>"; };
 		BAC0B909242E440100B6FEBC /* Pagination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pagination.swift; sourceTree = "<group>"; };
+		BAC0B90B242E4CF700B6FEBC /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		BAC0B90D242E4E2300B6FEBC /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		BAED042F242BA9E600DCA115 /* FavoriteGif+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FavoriteGif+CoreDataClass.swift"; path = "FavoriteGifs/Models/FavoriteGif+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BAED0430242BA9E600DCA115 /* FavoriteGif+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FavoriteGif+CoreDataProperties.swift"; path = "FavoriteGifs/Models/FavoriteGif+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BAED0433242BAA2800DCA115 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -170,6 +174,8 @@
 			children = (
 				BAC09928242A3160004D2F96 /* NetworkError.swift */,
 				BAED0433242BAA2800DCA115 /* DataController.swift */,
+				BAC0B90B242E4CF700B6FEBC /* UIImage+Extensions.swift */,
+				BAC0B90D242E4E2300B6FEBC /* UIImageView+Extensions.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -336,7 +342,9 @@
 				BAA20590242A50AF0025C73E /* GifCollectionViewCell.swift in Sources */,
 				BA56B320242B9DCE00E6DBB0 /* DetailViewController.swift in Sources */,
 				BA513928242107F500044D6A /* SceneDelegate.swift in Sources */,
+				BAC0B90C242E4CF700B6FEBC /* UIImage+Extensions.swift in Sources */,
 				BAED0434242BAA2800DCA115 /* DataController.swift in Sources */,
+				BAC0B90E242E4E2300B6FEBC /* UIImageView+Extensions.swift in Sources */,
 				BA513932242107F500044D6A /* FavoriteGifs.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

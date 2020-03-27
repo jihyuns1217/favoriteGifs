@@ -5,6 +5,8 @@
 //  Created by Jihyun Son on 2020/03/17.
 //  Copyright © 2020 Jihyun Son. All rights reserved.
 //
+//  reference: https://github.com/52inc/SwiftyGiphy/blob/c564bead94b377aca483c402a60f0288e41f158d/Library/SwiftyGiphyGridLayout.swift
+//
 
 import UIKit
 
