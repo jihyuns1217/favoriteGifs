@@ -16,11 +16,12 @@ struct Gif {
 }
 
 extension Gif {
-    static func gifs(query: String, completion: @escaping ((Result<[Gif], Error>) -> Void)) {
+    static func gifs(query: String, offset: Int, completion: @escaping ((Result<([Gif], Pagination), Error>) -> Void)) {
         var components = URLComponents(string: "https://api.giphy.com/v1/gifs/search")!
         components.queryItems = [
             URLQueryItem(name: "api_key", value: "ozncenAXiDpWKYfF0pFB6M9ajxV5K3BU")
             , URLQueryItem(name: "q", value: query)
+            , URLQueryItem(name: "offset", value: "\(offset)")
         ]
         
         let request = URLRequest(url: components.url!)
@@ -34,7 +35,13 @@ extension Gif {
             }
             
             do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                
                 guard let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                    , let paginationString = jsonObject["pagination"] as? [String:Any]
+                    , let paginationStringData = try? JSONSerialization.data(withJSONObject: paginationString, options: .prettyPrinted)
+                    , let pagination = try? decoder.decode(Pagination.self, from: paginationStringData)
                     , let rawGifs = jsonObject["data"] as? [[String: Any]] else {
                         completion(.failure(error ?? NetworkError.invalidData))
                         return
@@ -61,7 +68,7 @@ extension Gif {
                 }
                 
                 
-                completion(.success(gifs))
+                completion(.success((gifs, pagination)))
             } catch {
                 completion(.failure(error))
                 return

@@ -15,6 +15,9 @@ class SearchViewController: UIViewController {
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
     
     var gifs = [Gif]()
+    private var pagination: Pagination?
+    
+    var isLoading = false
     
     private var searchCoalesceTimer: Timer? {
         willSet {
@@ -63,29 +66,64 @@ class SearchViewController: UIViewController {
         definesPresentationContext = true
     }
     
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let pagination = pagination else {
+            return
+        }
+        
+        if scrollView.contentOffset.y + scrollView.bounds.height + 100 >= scrollView.contentSize.height {
+            if pagination.offset + pagination.count < pagination.totalCount {
+                guard let searchText = searchController.searchBar.text, searchText.count > 0 else {
+                    return
+                }
+                
+                getData(searchText: searchText)
+            }
+        }
+    }
 }
 
 extension SearchViewController: UISearchResultsUpdating {
+    fileprivate func getData(searchText: String) {
+        guard !isLoading else {
+            return
+        }
+        isLoading = true
+        
+        Gif.gifs(query: searchText, offset: self.gifs.count) { (result) in
+            defer {
+                self.isLoading = false
+            }
+            
+            switch result {
+            case .success(let (gifs, pagination)):
+                self.pagination = pagination
+                self.gifs.append(contentsOf: gifs)
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            case .failure(let error):
+                let alertController = UIAlertController(title: NSLocalizedString("네트워크 오류", comment: ""), message: error.localizedDescription, preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: NSLocalizedString("확인", comment: ""), style: .default, handler : nil)
+                alertController.addAction(defaultAction)
+
+                DispatchQueue.main.async {
+                    self.present(alertController, animated: true)
+                }
+            }
+        }
+    }
+    
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text, searchText.count > 0 else {
             return
         }
         
         searchCoalesceTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [unowned self] _ in
-            Gif.gifs(query: searchText) { (result) in
-                switch result {
-                case .success(let gifs):
-                    self.gifs = gifs
-                    
-                    DispatchQueue.main.async {
-                        self.collectionView.reloadData()
-                    }
-                case .failure(let error):
-                    let alertController = UIAlertController(title: NSLocalizedString("네트워크 오류", comment: ""), message: error.localizedDescription, preferredStyle: .alert)
-                    self.present(alertController, animated: true)
-                }
-            }
+            self.pagination = nil
+            self.gifs.removeAll()
+            self.getData(searchText: searchText)
         })
     }
 }
