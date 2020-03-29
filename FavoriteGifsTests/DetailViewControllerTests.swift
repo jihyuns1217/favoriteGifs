@@ -21,7 +21,7 @@ class DetailViewControllerTests: XCTestCase {
 
     func testDidSelectHeart_addToFavoriteGif() {
         // Given
-        let gif = FavoriteGif(entity: NSEntityDescription.entity(forEntityName: String(describing: FavoriteGif.self), in: DataController.shared.persistentContainer.viewContext)!, insertInto: nil)
+        let gif = Gif(entity: NSEntityDescription.entity(forEntityName: String(describing: Gif.self), in: DataController.shared.persistentContainer.viewContext)!, insertInto: nil)
         gif.aspectRatio = 1
         gif.id = "26ybwyb5dKBiKsZJC"
         gif.url = URL(string: "https://media0.giphy.com/media/26ybwyb5dKBiKsZJC/200_s.gif?cid=cde4eab81072172ddf261bd763ffd165642cac492a851e67&rid=200_s.gif")!

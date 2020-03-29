@@ -14,7 +14,7 @@ class SearchViewController: UIViewController {
     private let searchContainerView: UIView = UIView(frame: CGRect.zero)
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
     
-    var gifs = [FavoriteGif]()
+    var gifs = [Gif]()
     private var pagination: Pagination?
     
     var isLoading = false
@@ -92,7 +92,7 @@ extension SearchViewController: UISearchResultsUpdating {
         }
         isLoading = true
         
-        FavoriteGif.gifs(dataTaskManager: dataTaskManager, query: searchText, offset: self.gifs.count) { (result) in
+        Gif.gifs(dataTaskManager: dataTaskManager, query: searchText, offset: self.gifs.count) { (result) in
             defer {
                 self.isLoading = false
             }

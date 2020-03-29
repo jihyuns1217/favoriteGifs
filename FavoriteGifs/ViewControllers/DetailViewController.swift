@@ -12,9 +12,9 @@ import CoreData
 class DetailViewController: UIViewController {
     private var imageView: UIImageView!
     
-    var gif: FavoriteGif!
+    var gif: Gif!
     
-    private var fetchedGifs = [FavoriteGif]()
+    private var fetchedGifs = [Gif]()
     private var isFavorite = false
     
     override func viewDidLoad() {
@@ -64,12 +64,12 @@ class DetailViewController: UIViewController {
         
         
         let moc = DataController.shared.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteGif")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Gif.self))
         fetchRequest.predicate = NSPredicate(format: "id == %@", gif.id)
         
         isFavorite = false
         do {
-            fetchedGifs = try moc.fetch(fetchRequest) as! [FavoriteGif]
+            fetchedGifs = try moc.fetch(fetchRequest) as! [Gif]
             if !fetchedGifs.isEmpty {
                 isFavorite = true
             }

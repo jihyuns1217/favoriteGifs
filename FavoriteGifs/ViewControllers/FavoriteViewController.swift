@@ -13,7 +13,7 @@ class FavoriteViewController: UIViewController {
     
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
     
-    var gifs = [FavoriteGif]()
+    var gifs = [Gif]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,9 +51,9 @@ class FavoriteViewController: UIViewController {
     
     @objc private func getData() {
         let moc = DataController.shared.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteGif")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Gif.self))
         do {
-            gifs = try moc.fetch(fetchRequest) as! [FavoriteGif]
+            gifs = try moc.fetch(fetchRequest) as! [Gif]
             collectionView.reloadData()
             collectionView.refreshControl?.endRefreshing()
         } catch {

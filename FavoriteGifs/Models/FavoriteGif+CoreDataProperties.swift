@@ -1,5 +1,5 @@
 //
-//  FavoriteGif+CoreDataProperties.swift
+//  Gif+CoreDataProperties.swift
 //  FavoriteGifs
 //
 //  Created by Jihyun Son on 2020/03/26.
@@ -10,10 +10,10 @@
 import Foundation
 import CoreData
 
-extension FavoriteGif {
+extension Gif {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<FavoriteGif> {
-        return NSFetchRequest<FavoriteGif>(entityName: "FavoriteGif")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Gif> {
+        return NSFetchRequest<Gif>(entityName: String(describing: self))
     }
 
     @NSManaged public var aspectRatio: Float

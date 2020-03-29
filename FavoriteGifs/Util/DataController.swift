@@ -41,7 +41,7 @@ class DataController: NSObject {
     }
     
     func removeAll() {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteGif")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Gif.self))
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {

@@ -76,10 +76,10 @@ class GifTests: XCTestCase {
         }
         """.data(using: .utf8)
         
-        FavoriteGif.gifs(dataTaskManager: dataTaskManager, query: "", offset: 0) { (result) in
+        Gif.gifs(dataTaskManager: dataTaskManager, query: "", offset: 0) { (result) in
         }
         
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: FavoriteGif.self))
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Gif.self))
         let count = try DataController.shared.persistentContainer.viewContext.count(for: fetchRequest)
         XCTAssertEqual(count, 0)
     }

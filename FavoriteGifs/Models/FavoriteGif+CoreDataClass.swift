@@ -1,5 +1,5 @@
 //
-//  FavoriteGif+CoreDataClass.swift
+//  Gif+CoreDataClass.swift
 //  FavoriteGifs
 //
 //  Created by Jihyun Son on 2020/03/26.
@@ -11,13 +11,13 @@ import Foundation
 import CoreData
 import UIKit
 
-@objc(FavoriteGif)
-public class FavoriteGif: NSManagedObject {
+@objc(Gif)
+public class Gif: NSManagedObject {
 
 }
 
-extension FavoriteGif {
-    static func gifs(dataTaskManager: DataTaskManager, query: String, offset: Int, completion: @escaping ((Result<([FavoriteGif], Pagination), Error>) -> Void)) {
+extension Gif {
+    static func gifs(dataTaskManager: DataTaskManager, query: String, offset: Int, completion: @escaping ((Result<([Gif], Pagination), Error>) -> Void)) {
         var components = URLComponents(string: "https://api.giphy.com/v1/gifs/search")!
         components.queryItems = [
             URLQueryItem(name: "api_key", value: "ozncenAXiDpWKYfF0pFB6M9ajxV5K3BU")
@@ -48,7 +48,7 @@ extension FavoriteGif {
                             return
                     }
                     
-                    var gifs = [FavoriteGif]()
+                    var gifs = [Gif]()
                     for rawGif in rawGifs {
                         guard let id = rawGif["id"] as? String
                             , let images = rawGif["images"] as? [String: Any]
@@ -65,7 +65,7 @@ extension FavoriteGif {
                         let height = NSString(string: heightString).floatValue
                         let aspectRatio: CGFloat = CGFloat(height / width)
                         
-                        let gif = FavoriteGif(entity: NSEntityDescription.entity(forEntityName: String(describing: FavoriteGif.self), in: DataController.shared.persistentContainer.viewContext)!, insertInto: nil)
+                        let gif = Gif(entity: NSEntityDescription.entity(forEntityName: String(describing: Gif.self), in: DataController.shared.persistentContainer.viewContext)!, insertInto: nil)
                         gif.aspectRatio = Float(aspectRatio)
                         gif.id = id
                         gif.url = url
