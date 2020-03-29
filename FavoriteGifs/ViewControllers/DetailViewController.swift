@@ -12,7 +12,7 @@ import CoreData
 class DetailViewController: UIViewController {
     private var imageView: UIImageView!
     
-    var gif: Gif!
+    var gif: FavoriteGif!
     
     private var fetchedGifs = [FavoriteGif]()
     private var isFavorite = false

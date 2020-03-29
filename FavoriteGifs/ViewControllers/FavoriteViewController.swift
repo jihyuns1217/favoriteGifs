@@ -94,9 +94,7 @@ extension FavoriteViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
-        let favoriteGif = gifs[indexPath.item]
-        let gif = Gif(id: favoriteGif.id, url: favoriteGif.url, aspectRatio: CGFloat(favoriteGif.aspectRatio))
-        detailViewController.gif = gif
+        detailViewController.gif = gifs[indexPath.item]
         
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }

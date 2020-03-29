@@ -14,7 +14,7 @@ class SearchViewController: UIViewController {
     private let searchContainerView: UIView = UIView(frame: CGRect.zero)
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
     
-    var gifs = [Gif]()
+    var gifs = [FavoriteGif]()
     private var pagination: Pagination?
     
     var isLoading = false
@@ -77,20 +77,20 @@ class SearchViewController: UIViewController {
                     return
                 }
                 
-                getData(searchText: searchText)
+                getData(searchText: searchText, paging: true)
             }
         }
     }
 }
 
 extension SearchViewController: UISearchResultsUpdating {
-    fileprivate func getData(searchText: String) {
+    fileprivate func getData(searchText: String, paging: Bool) {
         guard !isLoading else {
             return
         }
         isLoading = true
         
-        Gif.gifs(query: searchText, offset: self.gifs.count) { (result) in
+        FavoriteGif.gifs(query: searchText, offset: self.gifs.count) { (result) in
             defer {
                 self.isLoading = false
             }
@@ -98,7 +98,12 @@ extension SearchViewController: UISearchResultsUpdating {
             switch result {
             case .success(let (gifs, pagination)):
                 self.pagination = pagination
-                self.gifs.append(contentsOf: gifs)
+                if paging {
+                    self.gifs.append(contentsOf: gifs)
+                } else {
+                    self.gifs = gifs
+                }
+                
                 
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
@@ -122,8 +127,7 @@ extension SearchViewController: UISearchResultsUpdating {
         
         searchCoalesceTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [unowned self] _ in
             self.pagination = nil
-            self.gifs.removeAll()
-            self.getData(searchText: searchText)
+            self.getData(searchText: searchText, paging: false)
         })
     }
 }
@@ -154,7 +158,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
 extension SearchViewController: DynamicHeightCollectionViewLayoutDelegate {
     
      func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
-        let height = width * gifs[indexPath.item].aspectRatio
+        let height = width * CGFloat(gifs[indexPath.item].aspectRatio)
         
         return height
     }
