@@ -17,7 +17,7 @@ public class FavoriteGif: NSManagedObject {
 }
 
 extension FavoriteGif {
-    static func gifs(query: String, offset: Int, completion: @escaping ((Result<([FavoriteGif], Pagination), Error>) -> Void)) {
+    static func gifs(dataTaskManager: DataTaskManager, query: String, offset: Int, completion: @escaping ((Result<([FavoriteGif], Pagination), Error>) -> Void)) {
         var components = URLComponents(string: "https://api.giphy.com/v1/gifs/search")!
         components.queryItems = [
             URLQueryItem(name: "api_key", value: "ozncenAXiDpWKYfF0pFB6M9ajxV5K3BU")
@@ -27,7 +27,7 @@ extension FavoriteGif {
         
         let request = URLRequest(url: components.url!)
         
-        URLDataTaskManager.shared.resumeDataTask(request: request) { (result) in
+        dataTaskManager.resumeDataTask(request: request) { (result) in
             switch result {
             case .success(let data):
                 do {
@@ -65,7 +65,7 @@ extension FavoriteGif {
                         let height = NSString(string: heightString).floatValue
                         let aspectRatio: CGFloat = CGFloat(height / width)
                         
-                        let gif = NSEntityDescription.insertNewObject(forEntityName: "FavoriteGif", into: DataController.shared.persistentContainer.viewContext) as! FavoriteGif
+                        let gif = FavoriteGif(entity: NSEntityDescription.entity(forEntityName: String(describing: FavoriteGif.self), in: DataController.shared.persistentContainer.viewContext)!, insertInto: nil)
                         gif.aspectRatio = Float(aspectRatio)
                         gif.id = id
                         gif.url = url

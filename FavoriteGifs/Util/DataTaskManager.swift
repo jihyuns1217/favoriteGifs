@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct URLDataTaskManager {
-    static var shared: URLDataTaskManager = URLDataTaskManager()
+class DataTaskManager {
+    static var shared: DataTaskManager = DataTaskManager()
     
     func resumeDataTask(request: URLRequest, completion: @escaping ((Result<Data, Error>) -> Void)) {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
