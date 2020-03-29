@@ -62,19 +62,7 @@ class FavoriteViewController: UIViewController {
     }
     
     @objc private func removeAll() {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteGif")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
-        do {
-            let moc = DataController.shared.persistentContainer.viewContext
-            try moc.execute(deleteRequest)
-            try moc.save()
-            
-            gifs.removeAll()
-            collectionView.reloadData()
-        } catch let error as NSError {
-            fatalError("Failure to delete context: \(error)")
-        }
+        DataController.shared.removeAll()
     }
 }
 

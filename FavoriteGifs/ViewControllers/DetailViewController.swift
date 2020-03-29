@@ -32,10 +32,7 @@ class DetailViewController: UIViewController {
             fetchedGifs.removeAll()
             
         } else {
-            let favoriteGif = NSEntityDescription.insertNewObject(forEntityName: String(describing: FavoriteGif.self), into: DataController.shared.persistentContainer.viewContext) as! FavoriteGif
-            favoriteGif.id = gif.id
-            favoriteGif.url = gif.url
-            favoriteGif.aspectRatio = Float(gif.aspectRatio)
+            DataController.shared.persistentContainer.viewContext.insert(gif)
         }
         
         DataController.shared.saveContext()

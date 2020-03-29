@@ -28,7 +28,7 @@ class DataController: NSObject {
     }
     
     // MARK: - Core Data Saving support
-    func saveContext () {
+    func saveContext() {
         let context = DataController.shared.persistentContainer.viewContext
         if context.hasChanges {
             do {
@@ -37,6 +37,19 @@ class DataController: NSObject {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
+        }
+    }
+    
+    func removeAll() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteGif")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            let moc = DataController.shared.persistentContainer.viewContext
+            try moc.execute(deleteRequest)
+            try moc.save()
+        } catch let error as NSError {
+            fatalError("Failure to delete context: \(error)")
         }
     }
 }
