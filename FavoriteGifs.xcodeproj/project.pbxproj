@@ -19,7 +19,6 @@
 		BA51394D242107F800044D6A /* FavoriteGifsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA51394C242107F800044D6A /* FavoriteGifsUITests.swift */; };
 		BA56B320242B9DCE00E6DBB0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA56B31F242B9DCE00E6DBB0 /* DetailViewController.swift */; };
 		BAA20590242A50AF0025C73E /* GifCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA2058F242A50AF0025C73E /* GifCollectionViewCell.swift */; };
-		BAC09926242A2AB2004D2F96 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC09925242A2AB2004D2F96 /* Gif.swift */; };
 		BAC09929242A3160004D2F96 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC09928242A3160004D2F96 /* NetworkError.swift */; };
 		BAC0992C242A366B004D2F96 /* DynamicHeightCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC0992B242A366B004D2F96 /* DynamicHeightCollectionViewLayout.swift */; };
 		BAC0B90A242E440100B6FEBC /* Pagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC0B909242E440100B6FEBC /* Pagination.swift */; };
@@ -70,7 +69,6 @@
 		BA51394E242107F800044D6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA56B31F242B9DCE00E6DBB0 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		BAA2058F242A50AF0025C73E /* GifCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifCollectionViewCell.swift; sourceTree = "<group>"; };
-		BAC09925242A2AB2004D2F96 /* Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		BAC09928242A3160004D2F96 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		BAC0992B242A366B004D2F96 /* DynamicHeightCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightCollectionViewLayout.swift; sourceTree = "<group>"; };
 		BAC0B909242E440100B6FEBC /* Pagination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pagination.swift; sourceTree = "<group>"; };
@@ -174,7 +172,6 @@
 			children = (
 				BAED042F242BA9E600DCA115 /* FavoriteGif+CoreDataClass.swift */,
 				BAED0430242BA9E600DCA115 /* FavoriteGif+CoreDataProperties.swift */,
-				BAC09925242A2AB2004D2F96 /* Gif.swift */,
 				BAC0B909242E440100B6FEBC /* Pagination.swift */,
 			);
 			path = Models;
@@ -356,7 +353,6 @@
 				BAC0B90A242E440100B6FEBC /* Pagination.swift in Sources */,
 				BAC09929242A3160004D2F96 /* NetworkError.swift in Sources */,
 				BAED0432242BA9E600DCA115 /* FavoriteGif+CoreDataProperties.swift in Sources */,
-				BAC09926242A2AB2004D2F96 /* Gif.swift in Sources */,
 				BA513926242107F500044D6A /* AppDelegate.swift in Sources */,
 				BAC0992C242A366B004D2F96 /* DynamicHeightCollectionViewLayout.swift in Sources */,
 				BAA20590242A50AF0025C73E /* GifCollectionViewCell.swift in Sources */,
