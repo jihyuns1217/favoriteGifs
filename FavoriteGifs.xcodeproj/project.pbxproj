@@ -72,8 +72,8 @@
 		BAC0B909242E440100B6FEBC /* Pagination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pagination.swift; sourceTree = "<group>"; };
 		BAC0B90B242E4CF700B6FEBC /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		BAC0B90D242E4E2300B6FEBC /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
-		BAED042F242BA9E600DCA115 /* FavoriteGif+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FavoriteGif+CoreDataClass.swift"; path = "FavoriteGifs/Models/FavoriteGif+CoreDataClass.swift"; sourceTree = "<group>"; };
-		BAED0430242BA9E600DCA115 /* FavoriteGif+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FavoriteGif+CoreDataProperties.swift"; path = "FavoriteGifs/Models/FavoriteGif+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BAED042F242BA9E600DCA115 /* FavoriteGif+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteGif+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BAED0430242BA9E600DCA115 /* FavoriteGif+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteGif+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BAED0433242BAA2800DCA115 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,8 +105,6 @@
 		BA513919242107F500044D6A = {
 			isa = PBXGroup;
 			children = (
-				BAED042F242BA9E600DCA115 /* FavoriteGif+CoreDataClass.swift */,
-				BAED0430242BA9E600DCA115 /* FavoriteGif+CoreDataProperties.swift */,
 				BA513924242107F500044D6A /* FavoriteGifs */,
 				BA513940242107F800044D6A /* FavoriteGifsTests */,
 				BA51394B242107F800044D6A /* FavoriteGifsUITests */,
@@ -163,6 +161,8 @@
 		BAC09924242A2A25004D2F96 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BAED042F242BA9E600DCA115 /* FavoriteGif+CoreDataClass.swift */,
+				BAED0430242BA9E600DCA115 /* FavoriteGif+CoreDataProperties.swift */,
 				BAC09925242A2AB2004D2F96 /* Gif.swift */,
 				BAC0B909242E440100B6FEBC /* Pagination.swift */,
 			);
