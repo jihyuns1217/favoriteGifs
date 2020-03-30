@@ -13,6 +13,6 @@ class StubDataTaskManager: DataTaskManager {
     var data: Data!
     
     override func resumeDataTask(request: URLRequest) {
-        delegate?.dataTaskCompleted(result: .success(data))
+        delegate?.dataTaskManager(self, didCompeleteWithResult: .success(data))
     }
 }

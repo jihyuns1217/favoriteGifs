@@ -11,9 +11,9 @@ import CoreData
 import UIKit
 
 class GifService {
-    static var shared: GifService = GifService()
+    static let shared: GifService = GifService()
     
-    var completion: ((Result<([Gif], Pagination), Error>) -> Void)!
+    private var completion: ((Result<([Gif], Pagination), Error>) -> Void)!
     
     func gifs(query: String, offset: Int, completion: @escaping ((Result<([Gif], Pagination), Error>) -> Void))  {
         var components = URLComponents(string: "https://api.giphy.com/v1/gifs/search")!
@@ -25,8 +25,8 @@ class GifService {
         
         let request = URLRequest(url: components.url!)
         DataTaskManager.shared.delegate = self
-        DataTaskManager.shared.resumeDataTask(request: request)
         self.completion = completion
+        DataTaskManager.shared.resumeDataTask(request: request)
     }
 }
 

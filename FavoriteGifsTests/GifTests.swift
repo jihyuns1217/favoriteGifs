@@ -11,13 +11,15 @@ import CoreData
 @testable import FavoriteGifs
 
 class GifTests: XCTestCase {
+    let dataTaskManager = StubDataTaskManager()
 
     override func setUp() {
         DataController.shared.removeAll()
+        
+        DataTaskManager.shared = dataTaskManager
     }
 
     func testGifs_doNotInsertToContext() throws {
-        let dataTaskManager = StubDataTaskManager()
         dataTaskManager.data = """
         {
             "data": [
@@ -76,7 +78,7 @@ class GifTests: XCTestCase {
         }
         """.data(using: .utf8)
         
-        GifService().gifs(dataTaskManager: dataTaskManager, query: "", offset: 0) { (result) in
+        GifService.shared.gifs(query: "", offset: 0) { (result) in
         }
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Gif.self))

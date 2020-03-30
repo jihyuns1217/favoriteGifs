@@ -18,6 +18,7 @@ protocol ProgressBarDelegate: class {
 
 class DataTaskManager: NSObject {
     static var shared: DataTaskManager = DataTaskManager()
+    
     weak var delegate: DataTaskManagerDelegate?
     weak var progressBarDelegate: ProgressBarDelegate?
     
@@ -38,7 +39,6 @@ class DataTaskManager: NSObject {
         dataTask = session.dataTask(with: request)
         dataTask!.resume()
     }
-    
 }
 
 extension DataTaskManager: URLSessionDataDelegate {
