@@ -110,6 +110,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA36C37524322EE700540BBE /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				BAC09928242A3160004D2F96 /* NetworkError.swift */,
+				BAC0B9152430DFA900B6FEBC /* DataTaskManager.swift */,
+				BA36C36F24321F6800540BBE /* GifService.swift */,
+				BAED0433242BAA2800DCA115 /* DataController.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		BA36C37624322F0700540BBE /* UIKit+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BAC0B90B242E4CF700B6FEBC /* UIImage+Extensions.swift */,
+				BAC0B90D242E4E2300B6FEBC /* UIImageView+Extensions.swift */,
+				BA36C3712432231600540BBE /* ReusableView+Extensions.swift */,
+			);
+			path = "UIKit+Extensions";
+			sourceTree = "<group>";
+		};
 		BA513919242107F500044D6A = {
 			isa = PBXGroup;
 			children = (
@@ -133,7 +154,6 @@
 		BA513924242107F500044D6A /* FavoriteGifs */ = {
 			isa = PBXGroup;
 			children = (
-				BAC09927242A3147004D2F96 /* Util */,
 				BAC09924242A2A25004D2F96 /* Models */,
 				BAC0992A242A3648004D2F96 /* Views */,
 				BAC0992D242A3689004D2F96 /* ViewControllers */,
@@ -151,8 +171,8 @@
 		BA513940242107F800044D6A /* FavoriteGifsTests */ = {
 			isa = PBXGroup;
 			children = (
-				BAC0B9172430E37400B6FEBC /* Util */,
 				BA513943242107F800044D6A /* Info.plist */,
+				BAC0B9182430E38200B6FEBC /* StubDataTaskManager.swift */,
 				BAC0B9112430D3F800B6FEBC /* DetailViewControllerTests.swift */,
 				BAC0B9132430DE5E00B6FEBC /* GifTests.swift */,
 			);
@@ -171,6 +191,7 @@
 		BAC09924242A2A25004D2F96 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BA36C37524322EE700540BBE /* Utils */,
 				BAED042F242BA9E600DCA115 /* Gif+CoreDataClass.swift */,
 				BAED0430242BA9E600DCA115 /* Gif+CoreDataProperties.swift */,
 				BAC0B909242E440100B6FEBC /* Pagination.swift */,
@@ -178,23 +199,10 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		BAC09927242A3147004D2F96 /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				BAC09928242A3160004D2F96 /* NetworkError.swift */,
-				BAC0B9152430DFA900B6FEBC /* DataTaskManager.swift */,
-				BA36C36F24321F6800540BBE /* GifService.swift */,
-				BAED0433242BAA2800DCA115 /* DataController.swift */,
-				BAC0B90B242E4CF700B6FEBC /* UIImage+Extensions.swift */,
-				BAC0B90D242E4E2300B6FEBC /* UIImageView+Extensions.swift */,
-				BA36C3712432231600540BBE /* ReusableView+Extensions.swift */,
-			);
-			path = Util;
-			sourceTree = "<group>";
-		};
 		BAC0992A242A3648004D2F96 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BA36C37624322F0700540BBE /* UIKit+Extensions */,
 				BAC0992B242A366B004D2F96 /* DynamicHeightCollectionViewLayout.swift */,
 				BAA2058F242A50AF0025C73E /* GifCollectionViewCell.swift */,
 			);
@@ -209,14 +217,6 @@
 				BA56B31F242B9DCE00E6DBB0 /* DetailViewController.swift */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		BAC0B9172430E37400B6FEBC /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				BAC0B9182430E38200B6FEBC /* StubDataTaskManager.swift */,
-			);
-			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
