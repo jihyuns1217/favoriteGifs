@@ -120,7 +120,7 @@ extension SearchViewController: UISearchResultsUpdating {
         }
         isLoading = true
                 
-        GifService.shared.gifs(query: searchText, offset: self.gifs.count) { [weak self] (result) in
+        GifService.shared.gifs(query: searchText, offset: isPaging ? self.gifs.count : 0) { [weak self] (result) in
             guard let self = self else {
                 return
             }
