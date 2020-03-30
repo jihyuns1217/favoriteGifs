@@ -50,7 +50,7 @@ class FavoriteViewController: UIViewController {
     }
     
     private func setupRemoveAllButton() {
-        let button = UIBarButtonItem(title: "Remove All", style: .plain, target: self, action: #selector(removeAll))
+        let button = UIBarButtonItem(title: NSLocalizedString("Remove All", comment: ""), style: .plain, target: self, action: #selector(removeAll))
         navigationItem.setRightBarButton(button, animated: true)
     }
     
