@@ -80,7 +80,7 @@ class GifTests: XCTestCase {
         """.data(using: .utf8)
         
         // When
-        GifService.shared.gifs(query: "", offset: 0) { (result) in
+        Gif.gifs(query: "", offset: 0) { (result) in
         }
         
         // Then
