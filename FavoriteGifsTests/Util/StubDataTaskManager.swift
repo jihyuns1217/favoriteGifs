@@ -12,7 +12,7 @@ import Foundation
 class StubDataTaskManager: DataTaskManager {
     var data: Data!
     
-    override func resumeDataTask(request: URLRequest, completion: @escaping ((Result<Data, Error>) -> Void)) {
-        completion(.success(data))
+    override func resumeDataTask(request: URLRequest) {
+        delegate?.dataTaskCompleted(result: .success(data))
     }
 }

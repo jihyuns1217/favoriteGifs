@@ -76,7 +76,7 @@ class GifTests: XCTestCase {
         }
         """.data(using: .utf8)
         
-        Gif.gifs(dataTaskManager: dataTaskManager, query: "", offset: 0) { (result) in
+        GifService().gifs(dataTaskManager: dataTaskManager, query: "", offset: 0) { (result) in
         }
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Gif.self))

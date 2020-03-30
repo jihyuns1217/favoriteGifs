@@ -19,7 +19,7 @@ class SearchViewController: UIViewController {
     var gifs = [Gif]()
     private var pagination: Pagination?
     
-    var isLoading = false
+    private var isLoading = false
     private var isPaging = false
     
     var dataTaskManager = DataTaskManager.shared
