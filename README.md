@@ -20,8 +20,10 @@ https://developers.giphy.com/docs/api/
     
 ## 추가구현 ##
 1. gif 이미지 크기에 따라 다이나믹한 셀 사이즈 설정
-    - [DynamicHeightCollectionViewLayout](FavoriteGifs/Views/DynamicHeightCollectionViewLayout.swift)에서 각 셀을 그려갈 때 각 칼럼의 가장 하단 위치를 저장하여, 가장 하단 위치가 높은 칼럼부터 셀을 채워감. 
-    셀의 frame.origin.x를 각 셀의 높이를 반영한 각 칼럼의 가장 하단 위치로 설정해줌으로서 컬럼별로 셀의 크기에 맞게 셀들이 위치하도록 함.
-2. gif 재생
+    - [DynamicHeightCollectionViewLayout](FavoriteGifs/Views/DynamicHeightCollectionViewLayout.swift)에서 각 셀을 그려갈 때 각 칼럼의 가장 하단 위치를 저장하여, 가장 하단 위치가 높은 칼럼부터 셀을 채워감
+    셀의 frame.origin.x를 각 셀의 높이를 반영한 각 칼럼의 가장 하단 위치로 설정해줌으로서 컬럼별로 셀의 크기에 맞게 셀들이 위치하도록 함
+2. 페이징시 하단에 인디케이터 나타나도록 설정
+    - [DynamicHeightCollectionViewLayout](FavoriteGifs/Views/DynamicHeightCollectionViewLayout.swift)에서 섹션 푸터 영역을 마련하여 인디케이터를 보여줄 수 있도록 함
+3. gif 재생
 - [UIImage+Extensions](FavoriteGifs/Views/UIKit+Extensions/UIImage+Extensions.swift)에서 gif 데이터를 받아 각 프레임의 딜레이 시간을 ms으로 치환하여 딜레이 시간 간의 최대공약수로 나눈 값만큼 각 프레임을 더해서 UIImage.animatedImage을 이용함 
 - 최대공약수 관련 함수: [NumericFunctions](FavoriteGifs/Utils/NumericFunctions.swift)
