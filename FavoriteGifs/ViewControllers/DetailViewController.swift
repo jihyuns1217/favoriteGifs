@@ -57,15 +57,15 @@ class DetailViewController: UIViewController {
             fatalError("Failed to fetch favorite gifs: \(error)")
         }
         
-        let heartButton = UIBarButtonItem(image: heartImage(), style: .plain, target: self, action: #selector(didSelectHeart))
-        navigationItem.setRightBarButton(heartButton, animated: true)
+        let favoriteButton = UIBarButtonItem(image: favoriteImage(), style: .plain, target: self, action: #selector(toggleIsFavorite))
+        navigationItem.setRightBarButton(favoriteButton, animated: true)
     }
     
-    private func heartImage() -> UIImage? {
+    private func favoriteImage() -> UIImage? {
         return isFavorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
     }
     
-    @objc private func didSelectHeart() {
+    @objc private func toggleIsFavorite() {
         navigationItem.rightBarButtonItem?.isEnabled = false
         
         if isFavorite {
@@ -81,7 +81,7 @@ class DetailViewController: UIViewController {
         DataController.shared.saveContext()
         
         isFavorite.toggle()
-        navigationItem.rightBarButtonItem?.image = heartImage()
+        navigationItem.rightBarButtonItem?.image = favoriteImage()
         
         navigationItem.rightBarButtonItem?.isEnabled = true
     }
