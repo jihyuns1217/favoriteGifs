@@ -13,11 +13,14 @@ class SearchViewController: UIViewController {
     private let searchController = UISearchController(searchResultsController: nil)
     private let searchContainerView: UIView = UIView(frame: CGRect.zero)
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
+    private let topProgressView = UIProgressView(progressViewStyle: .bar)
+    private let bottomProgressView = UIProgressView(progressViewStyle: .bar)
     
     var gifs = [Gif]()
     private var pagination: Pagination?
     
     var isLoading = false
+    private var isPaging = false
     
     var dataTaskManager = DataTaskManager.shared
     
@@ -57,7 +60,7 @@ class SearchViewController: UIViewController {
             collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
-            self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
+            self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor)
         ])
         
         // 2. searchBar 붙이기
@@ -66,6 +69,24 @@ class SearchViewController: UIViewController {
         searchController.searchBar.placeholder = "Search Gifs"
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        
+        // 3. Progress bar
+        view.addSubview(topProgressView)
+        topProgressView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            topProgressView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: topProgressView.leadingAnchor),
+            self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: topProgressView.trailingAnchor)
+        ])
+        
+        view.addSubview(bottomProgressView)
+        bottomProgressView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            bottomProgressView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: bottomProgressView.leadingAnchor),
+            self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: bottomProgressView.trailingAnchor)
+        ])
+        DataTaskManager.shared.progressBarDelegate = self
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -79,31 +100,44 @@ class SearchViewController: UIViewController {
                     return
                 }
                 
-                getData(searchText: searchText, paging: true)
+                isPaging = true
+                getData(searchText: searchText)
             }
         }
     }
 }
 
 extension SearchViewController: UISearchResultsUpdating {
-    fileprivate func getData(searchText: String, paging: Bool) {
+    fileprivate func getData(searchText: String) {
         guard !isLoading else {
             return
         }
         isLoading = true
-        
-        Gif.gifs(dataTaskManager: dataTaskManager, query: searchText, offset: self.gifs.count) { (result) in
+                
+        GifService.shared.gifs(dataTaskManager: dataTaskManager, query: searchText, offset: self.gifs.count) { (result) in
             defer {
                 self.isLoading = false
+                
+                DispatchQueue.main.async {
+                    if self.isPaging {
+                        self.bottomProgressView.progress = 0
+                    } else {
+                        self.topProgressView.progress = 0
+                    }
+                }
             }
             
             switch result {
             case .success(let (gifs, pagination)):
                 self.pagination = pagination
-                if paging {
+                if self.isPaging {
                     self.gifs.append(contentsOf: gifs)
                 } else {
                     self.gifs = gifs
+                    
+                    DispatchQueue.main.async {
+                        self.collectionView.setContentOffset(.zero, animated: false)
+                    }
                 }
                 
                 
@@ -129,7 +163,8 @@ extension SearchViewController: UISearchResultsUpdating {
         
         searchCoalesceTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [unowned self] _ in
             self.pagination = nil
-            self.getData(searchText: searchText, paging: false)
+            self.isPaging = false
+            self.getData(searchText: searchText)
         })
     }
 }
@@ -163,6 +198,17 @@ extension SearchViewController: DynamicHeightCollectionViewLayoutDelegate {
         let height = width * CGFloat(gifs[indexPath.item].aspectRatio)
         
         return height
+    }
+}
+
+extension SearchViewController: ProgressBarDelegate {
+    func progressRateChanged(progressRate: Float) {
+        if isPaging {
+            bottomProgressView.progress = progressRate
+        } else {
+            topProgressView.progress = progressRate
+        }
+        
     }
 }
 

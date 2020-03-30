@@ -181,10 +181,10 @@
 			isa = PBXGroup;
 			children = (
 				BAC09928242A3160004D2F96 /* NetworkError.swift */,
+				BAC0B9152430DFA900B6FEBC /* DataTaskManager.swift */,
 				BAED0433242BAA2800DCA115 /* DataController.swift */,
 				BAC0B90B242E4CF700B6FEBC /* UIImage+Extensions.swift */,
 				BAC0B90D242E4E2300B6FEBC /* UIImageView+Extensions.swift */,
-				BAC0B9152430DFA900B6FEBC /* DataTaskManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
