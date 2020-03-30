@@ -46,6 +46,8 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
         return collectionView!.bounds.width - (insets.left + insets.right)
     }
     
+    var footerSize: CGSize = .zero
+    
     private var cellAttributeCache = [UICollectionViewLayoutAttributes]()
     
     private(set) var contentHeight: CGFloat = 0.0
@@ -110,7 +112,7 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
           with: IndexPath(item: 1, section: 0))
         
         prepareElement(
-          size: CGSize(width: contentWidth, height: 50), attributes: sectionFooterAttributes)
+          size: footerSize, attributes: sectionFooterAttributes)
         
         cellAttributeCache.append(footerAttributes)
     }

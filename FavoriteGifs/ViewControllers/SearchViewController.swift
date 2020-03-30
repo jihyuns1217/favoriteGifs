@@ -70,6 +70,7 @@ class SearchViewController: UIViewController {
         
         if let collectionViewLayout = collectionView.collectionViewLayout as? DynamicHeightCollectionViewLayout {
             collectionViewLayout.delegate = self
+            collectionViewLayout.footerSize = CGSize(width: collectionViewLayout.contentWidth, height: 50)
         }
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
