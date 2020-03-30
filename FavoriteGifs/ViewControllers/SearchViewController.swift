@@ -208,7 +208,7 @@ extension SearchViewController: DynamicHeightCollectionViewLayoutDelegate {
 
 // MARK: - ProgressBarDelegate
 extension SearchViewController: ProgressBarDelegate {
-    func progressRateChanged(progressRate: Float) {
+    func dataTaskManager(_ dataTaskManager: DataTaskManager, didCange progressRate: Float) {
         if isPaging {
             bottomProgressView.progress = progressRate
         } else {

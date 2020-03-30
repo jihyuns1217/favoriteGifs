@@ -9,11 +9,11 @@
 import Foundation
 
 protocol DataTaskManagerDelegate: class {
-    func dataTaskCompleted(result: Result<Data, Error>)
+    func dataTaskManager(_ dataTaskManager: DataTaskManager, didCompeleteWithResult result: Result<Data, Error>)
 }
 
 protocol ProgressBarDelegate: class {
-    func progressRateChanged(progressRate: Float)
+    func dataTaskManager(_ dataTaskManager: DataTaskManager, didCange progressRate: Float)
 }
 
 class DataTaskManager: NSObject {
@@ -55,21 +55,20 @@ extension DataTaskManager: URLSessionDataDelegate {
         receivedData!.append(data)
 
         let percentageDownloaded = Float(data.count) / Float(expectedContentLength)
-        progressBarDelegate?.progressRateChanged(progressRate: percentageDownloaded)
-        
+        progressBarDelegate?.dataTaskManager(self, didCange: percentageDownloaded)
     }
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        progressBarDelegate?.progressRateChanged(progressRate: 1)
+        progressBarDelegate?.dataTaskManager(self, didCange: 1)
         
         guard let data = receivedData,
             let response = task.response as? HTTPURLResponse,
             (200 ..< 300) ~= response.statusCode,
             error == nil else {
-                delegate?.dataTaskCompleted(result: .failure(error ?? NetworkError.extra))
+                delegate?.dataTaskManager(self, didCompeleteWithResult: .failure(error ?? NetworkError.extra))
                 return
         }
 
-        delegate?.dataTaskCompleted(result: .success(data))
+        delegate?.dataTaskManager(self, didCompeleteWithResult: .success(data))
     }
 }
