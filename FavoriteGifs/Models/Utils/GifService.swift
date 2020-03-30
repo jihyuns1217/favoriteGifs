@@ -15,6 +15,9 @@ class GifService {
     
     private var completion: ((Result<([Gif], Pagination), Error>) -> Void)!
     
+    private init() {
+    }
+    
     func gifs(query: String, offset: Int, completion: @escaping ((Result<([Gif], Pagination), Error>) -> Void))  {
         var components = URLComponents(string: "https://api.giphy.com/v1/gifs/search")!
         components.queryItems = [

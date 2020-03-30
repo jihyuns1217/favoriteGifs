@@ -28,7 +28,7 @@ class DataTaskManager: NSObject {
     
     var dataTask:URLSessionDataTask?
     
-    override init() {
+    private override init() {
         super.init()
         
         session = URLSession(configuration: URLSessionConfiguration.default, delegate:self, delegateQueue: OperationQueue.main)
@@ -37,7 +37,7 @@ class DataTaskManager: NSObject {
     func resumeDataTask(request: URLRequest) {
         receivedData = nil
         dataTask = session.dataTask(with: request)
-        dataTask!.resume()
+        dataTask!.resume()        
     }
 }
 
