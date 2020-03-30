@@ -12,18 +12,16 @@ import Foundation
 import CoreData
 
 class DataController: NSObject {
-    static var shared: DataController = DataController.init {
-    }
+    static var shared: DataController = DataController()
     
     var persistentContainer: NSPersistentCloudKitContainer
     
-    private init(completionClosure: @escaping () -> ()) {
+    private override init() {
         persistentContainer = NSPersistentCloudKitContainer(name: "FavoriteGifs")
         persistentContainer.loadPersistentStores(completionHandler: {(description, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-            completionClosure()
         })
     }
     
