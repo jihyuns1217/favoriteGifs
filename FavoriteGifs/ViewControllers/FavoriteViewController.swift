@@ -18,7 +18,7 @@ class FavoriteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getData()
+        getGifs()
         
         self.view.backgroundColor = .systemBackground
         collectionView.backgroundColor = .systemBackground
@@ -29,7 +29,7 @@ class FavoriteViewController: UIViewController {
         }
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: GifCollectionViewCell.self))
+        collectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: GifCollectionViewCell.reuseIdentifier)
         collectionView.dataSource = self
         collectionView.delegate = self
         self.view.addSubview(collectionView)
@@ -49,7 +49,7 @@ class FavoriteViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(getGifs), for: .valueChanged)
     }
     
-    @objc private func getData() {
+    @objc private func getGifs() {
         let moc = DataController.shared.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Gif.self))
         do {
@@ -73,7 +73,7 @@ extension FavoriteViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: GifCollectionViewCell.self), for: indexPath) as! GifCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(forIndexPath: indexPath) as GifCollectionViewCell
         
         cell.imageView.setGif(url: gifs[indexPath.item].url)
         

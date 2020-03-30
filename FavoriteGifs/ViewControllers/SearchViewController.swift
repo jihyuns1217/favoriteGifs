@@ -75,7 +75,7 @@ class SearchViewController: UIViewController {
         }
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: GifCollectionViewCell.self))
+        collectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: GifCollectionViewCell.reuseIdentifier)
         collectionView.dataSource = self
         collectionView.delegate = self
         self.view.addSubview(collectionView)
@@ -184,7 +184,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: GifCollectionViewCell.self), for: indexPath) as! GifCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(forIndexPath: indexPath) as GifCollectionViewCell
         cell.imageView.setGif(url: gifs[indexPath.item].url)
         return cell
     }
