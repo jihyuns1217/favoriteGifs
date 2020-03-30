@@ -43,50 +43,10 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = .systemBackground
-        collectionView.backgroundColor = .systemBackground
         
-        // 1. collectionView 붙이기
-        if let collectionViewLayout = collectionView.collectionViewLayout as? DynamicHeightCollectionViewLayout {
-            collectionViewLayout.delegate = self
-        }
-        
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: GifCollectionViewCell.self))
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        self.view.addSubview(collectionView)
-        
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
-            self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor)
-        ])
-        
-        // 2. searchBar 붙이기
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Gifs"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
-        
-        // 3. Progress bar
-        view.addSubview(topProgressView)
-        topProgressView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            topProgressView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: topProgressView.leadingAnchor),
-            self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: topProgressView.trailingAnchor)
-        ])
-        
-        view.addSubview(bottomProgressView)
-        bottomProgressView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            bottomProgressView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: bottomProgressView.leadingAnchor),
-            self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: bottomProgressView.trailingAnchor)
-        ])
-        DataTaskManager.shared.progressBarDelegate = self
+        setupCollectionView()
+        setupSearchController()
+        setupProgressBar()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -104,6 +64,55 @@ class SearchViewController: UIViewController {
                 getData(searchText: searchText)
             }
         }
+    }
+    
+    // MARK: - Private Methods
+    private func setupCollectionView() {
+        collectionView.backgroundColor = .systemBackground
+        
+        if let collectionViewLayout = collectionView.collectionViewLayout as? DynamicHeightCollectionViewLayout {
+            collectionViewLayout.delegate = self
+        }
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: GifCollectionViewCell.self))
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        self.view.addSubview(collectionView)
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
+            self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor)
+        ])
+    }
+    
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Gifs"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
+    private func setupProgressBar() {
+        view.addSubview(topProgressView)
+        topProgressView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            topProgressView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: topProgressView.leadingAnchor),
+            self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: topProgressView.trailingAnchor)
+        ])
+        
+        view.addSubview(bottomProgressView)
+        bottomProgressView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            bottomProgressView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: bottomProgressView.leadingAnchor),
+            self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: bottomProgressView.trailingAnchor)
+        ])
+        DataTaskManager.shared.progressBarDelegate = self
     }
 }
 
