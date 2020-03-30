@@ -13,7 +13,7 @@ class FavoriteViewController: UIViewController {
     
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
     
-    var gifs = [Gif]()
+    private var gifs = [Gif]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +21,16 @@ class FavoriteViewController: UIViewController {
         getGifs()
         
         self.view.backgroundColor = .systemBackground
+                
+        setupCollectionView()
+        setupRemoveAllButton()
+        setupRefreshControl()
+    }
+    
+    // MARK: - Private Methods
+    private func setupCollectionView() {
         collectionView.backgroundColor = .systemBackground
-        
-        // 1. collectionView 붙이기
+
         if let collectionViewLayout = collectionView.collectionViewLayout as? DynamicHeightCollectionViewLayout {
             collectionViewLayout.delegate = self
         }
@@ -40,14 +47,13 @@ class FavoriteViewController: UIViewController {
             self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
             self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
         ])
-        
-        let button = UIBarButtonItem(title: "Remove All", style: .plain, target: self, action: #selector(removeAll))
-        navigationItem.setRightBarButton(button, animated: true)
-        
-        setupRefreshControl()
     }
     
-    // MARK: - Private Methods
+    private func setupRemoveAllButton() {
+        let button = UIBarButtonItem(title: "Remove All", style: .plain, target: self, action: #selector(removeAll))
+        navigationItem.setRightBarButton(button, animated: true)
+    }
+    
     private func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
         
