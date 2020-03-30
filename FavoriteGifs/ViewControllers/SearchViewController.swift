@@ -26,8 +26,7 @@ class SearchViewController: UIViewController {
     
     private var searchCoalesceTimer: Timer? {
         willSet {
-            if searchCoalesceTimer?.isValid == true
-            {
+            if searchCoalesceTimer?.isValid == true {
                 searchCoalesceTimer?.invalidate()
             }
         }
