@@ -20,7 +20,7 @@ class DataController: NSObject {
     private init(completionClosure: @escaping () -> ()) {
         persistentContainer = NSPersistentCloudKitContainer(name: "FavoriteGifs")
         persistentContainer.loadPersistentStores(completionHandler: {(description, error) in
-            if let error = error {
+            if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
             completionClosure()
