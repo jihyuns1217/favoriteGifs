@@ -22,27 +22,7 @@ class DetailViewController: UIViewController {
         setUpData()
     }
     
-    @objc private func didSelectHeart() {
-        navigationItem.rightBarButtonItem?.isEnabled = false
-        
-        if isFavorite {
-            for gif in fetchedGifs {
-                DataController.shared.persistentContainer.viewContext.delete(gif)
-            }
-            fetchedGifs.removeAll()
-            
-        } else {
-            DataController.shared.persistentContainer.viewContext.insert(gif)
-        }
-        
-        DataController.shared.saveContext()
-        
-        isFavorite.toggle()
-        navigationItem.rightBarButtonItem?.image = heartImage()
-        
-        navigationItem.rightBarButtonItem?.isEnabled = true
-    }
-    
+    // MARK: - Private Methods
     private func setUpView() {
         self.view.backgroundColor = .systemBackground
         
@@ -83,6 +63,27 @@ class DetailViewController: UIViewController {
     
     private func heartImage() -> UIImage? {
         return isFavorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+    }
+    
+    @objc private func didSelectHeart() {
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        
+        if isFavorite {
+            for gif in fetchedGifs {
+                DataController.shared.persistentContainer.viewContext.delete(gif)
+            }
+            fetchedGifs.removeAll()
+            
+        } else {
+            DataController.shared.persistentContainer.viewContext.insert(gif)
+        }
+        
+        DataController.shared.saveContext()
+        
+        isFavorite.toggle()
+        navigationItem.rightBarButtonItem?.image = heartImage()
+        
+        navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
 }
