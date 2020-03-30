@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA36C37024321F6800540BBE /* GifService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA36C36F24321F6800540BBE /* GifService.swift */; };
 		BA513926242107F500044D6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA513925242107F500044D6A /* AppDelegate.swift */; };
 		BA513928242107F500044D6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA513927242107F500044D6A /* SceneDelegate.swift */; };
 		BA51392A242107F500044D6A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA513929242107F500044D6A /* SearchViewController.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA36C36F24321F6800540BBE /* GifService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifService.swift; sourceTree = "<group>"; };
 		BA513922242107F500044D6A /* FavoriteGifs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FavoriteGifs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA513925242107F500044D6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA513927242107F500044D6A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			children = (
 				BAC09928242A3160004D2F96 /* NetworkError.swift */,
 				BAC0B9152430DFA900B6FEBC /* DataTaskManager.swift */,
+				BA36C36F24321F6800540BBE /* GifService.swift */,
 				BAED0433242BAA2800DCA115 /* DataController.swift */,
 				BAC0B90B242E4CF700B6FEBC /* UIImage+Extensions.swift */,
 				BAC0B90D242E4E2300B6FEBC /* UIImageView+Extensions.swift */,
@@ -355,6 +358,7 @@
 				BAA20590242A50AF0025C73E /* GifCollectionViewCell.swift in Sources */,
 				BAC0B9162430DFA900B6FEBC /* DataTaskManager.swift in Sources */,
 				BA56B320242B9DCE00E6DBB0 /* DetailViewController.swift in Sources */,
+				BA36C37024321F6800540BBE /* GifService.swift in Sources */,
 				BA513928242107F500044D6A /* SceneDelegate.swift in Sources */,
 				BAC0B90C242E4CF700B6FEBC /* UIImage+Extensions.swift in Sources */,
 				BAED0434242BAA2800DCA115 /* DataController.swift in Sources */,
