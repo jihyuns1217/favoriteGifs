@@ -15,7 +15,6 @@
 		BA513932242107F500044D6A /* FavoriteGifs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA513930242107F500044D6A /* FavoriteGifs.xcdatamodeld */; };
 		BA513934242107F800044D6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA513933242107F800044D6A /* Assets.xcassets */; };
 		BA513937242107F800044D6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA513935242107F800044D6A /* LaunchScreen.storyboard */; };
-		BA513942242107F800044D6A /* FavoriteGifsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA513941242107F800044D6A /* FavoriteGifsTests.swift */; };
 		BA51394D242107F800044D6A /* FavoriteGifsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA51394C242107F800044D6A /* FavoriteGifsUITests.swift */; };
 		BA56B320242B9DCE00E6DBB0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA56B31F242B9DCE00E6DBB0 /* DetailViewController.swift */; };
 		BAA20590242A50AF0025C73E /* GifCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA2058F242A50AF0025C73E /* GifCollectionViewCell.swift */; };
@@ -62,7 +61,6 @@
 		BA513936242107F800044D6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA513938242107F800044D6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA51393D242107F800044D6A /* FavoriteGifsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FavoriteGifsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA513941242107F800044D6A /* FavoriteGifsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGifsTests.swift; sourceTree = "<group>"; };
 		BA513943242107F800044D6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA513948242107F800044D6A /* FavoriteGifsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FavoriteGifsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA51394C242107F800044D6A /* FavoriteGifsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGifsUITests.swift; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 			isa = PBXGroup;
 			children = (
 				BAC0B9172430E37400B6FEBC /* Util */,
-				BA513941242107F800044D6A /* FavoriteGifsTests.swift */,
 				BA513943242107F800044D6A /* Info.plist */,
 				BAC0B9112430D3F800B6FEBC /* DetailViewControllerTests.swift */,
 				BAC0B9132430DE5E00B6FEBC /* GifTests.swift */,
@@ -371,7 +368,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAC0B9142430DE5E00B6FEBC /* GifTests.swift in Sources */,
-				BA513942242107F800044D6A /* FavoriteGifsTests.swift in Sources */,
 				BAC0B9192430E38200B6FEBC /* StubDataTaskManager.swift in Sources */,
 				BAC0B9122430D3F800B6FEBC /* DetailViewControllerTests.swift in Sources */,
 			);
