@@ -27,7 +27,7 @@ class GifCollectionViewCell: UICollectionViewCell {
         setupView()
     }
     
-    func setupView() {
+    private func setupView() {
         imageView = UIImageView(frame: .zero)
         self.contentView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
