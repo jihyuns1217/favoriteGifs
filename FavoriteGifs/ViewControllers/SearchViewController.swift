@@ -13,6 +13,8 @@ class SearchViewController: UIViewController {
     private let searchController = UISearchController(searchResultsController: nil)
     private let searchContainerView: UIView = UIView(frame: CGRect.zero)
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
+    private let activityIndicator = UIActivityIndicatorView(style: .medium)
+    private let activityIndicatorBackgroundView = UIView(frame: .zero)
     
     private var gifs = [Gif]()
     private var pagination: Pagination?
@@ -41,6 +43,7 @@ class SearchViewController: UIViewController {
         
         setupCollectionView()
         setupSearchController()
+        setUpActivityIndicator()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -89,6 +92,29 @@ class SearchViewController: UIViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
+    
+    private func setUpActivityIndicator() {
+        activityIndicatorBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorBackgroundView.isUserInteractionEnabled = false
+        view.addSubview(activityIndicatorBackgroundView)
+        
+        NSLayoutConstraint.activate([
+            activityIndicatorBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            activityIndicatorBackgroundView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            activityIndicatorBackgroundView.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            activityIndicatorBackgroundView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        
+        activityIndicatorBackgroundView.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.topAnchor.constraint(equalTo: activityIndicatorBackgroundView.topAnchor, constant: 20),
+            activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorBackgroundView.centerXAnchor)
+        ])
+        
+    }
 }
 
 extension SearchViewController: UISearchResultsUpdating {
@@ -97,6 +123,12 @@ extension SearchViewController: UISearchResultsUpdating {
             return
         }
         isLoading = true
+        DispatchQueue.main.async {
+            if !self.isPaging {
+                self.activityIndicatorBackgroundView.backgroundColor = self.view.backgroundColor
+                self.activityIndicator.startAnimating()
+            }
+        }
                 
         Gif.gifs(query: searchText, offset: isPaging ? self.gifs.count : 0) { [weak self] (result) in
             guard let self = self else {
@@ -105,6 +137,10 @@ extension SearchViewController: UISearchResultsUpdating {
             
             defer {
                 self.isLoading = false
+                DispatchQueue.main.async {
+                    self.activityIndicatorBackgroundView.backgroundColor = .clear
+                    self.activityIndicator.stopAnimating()
+                }
             }
             
             switch result {
