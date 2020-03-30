@@ -27,8 +27,8 @@
 		BAC0B9142430DE5E00B6FEBC /* GifTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC0B9132430DE5E00B6FEBC /* GifTests.swift */; };
 		BAC0B9162430DFA900B6FEBC /* DataTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC0B9152430DFA900B6FEBC /* DataTaskManager.swift */; };
 		BAC0B9192430E38200B6FEBC /* StubDataTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC0B9182430E38200B6FEBC /* StubDataTaskManager.swift */; };
-		BAED0431242BA9E600DCA115 /* FavoriteGif+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED042F242BA9E600DCA115 /* FavoriteGif+CoreDataClass.swift */; };
-		BAED0432242BA9E600DCA115 /* FavoriteGif+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED0430242BA9E600DCA115 /* FavoriteGif+CoreDataProperties.swift */; };
+		BAED0431242BA9E600DCA115 /* Gif+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED042F242BA9E600DCA115 /* Gif+CoreDataClass.swift */; };
+		BAED0432242BA9E600DCA115 /* Gif+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED0430242BA9E600DCA115 /* Gif+CoreDataProperties.swift */; };
 		BAED0434242BAA2800DCA115 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED0433242BAA2800DCA115 /* DataController.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,8 +76,8 @@
 		BAC0B9132430DE5E00B6FEBC /* GifTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifTests.swift; sourceTree = "<group>"; };
 		BAC0B9152430DFA900B6FEBC /* DataTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTaskManager.swift; sourceTree = "<group>"; };
 		BAC0B9182430E38200B6FEBC /* StubDataTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubDataTaskManager.swift; sourceTree = "<group>"; };
-		BAED042F242BA9E600DCA115 /* FavoriteGif+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteGif+CoreDataClass.swift"; sourceTree = "<group>"; };
-		BAED0430242BA9E600DCA115 /* FavoriteGif+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteGif+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BAED042F242BA9E600DCA115 /* Gif+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gif+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BAED0430242BA9E600DCA115 /* Gif+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gif+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BAED0433242BAA2800DCA115 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -167,8 +167,8 @@
 		BAC09924242A2A25004D2F96 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BAED042F242BA9E600DCA115 /* FavoriteGif+CoreDataClass.swift */,
-				BAED0430242BA9E600DCA115 /* FavoriteGif+CoreDataProperties.swift */,
+				BAED042F242BA9E600DCA115 /* Gif+CoreDataClass.swift */,
+				BAED0430242BA9E600DCA115 /* Gif+CoreDataProperties.swift */,
 				BAC0B909242E440100B6FEBC /* Pagination.swift */,
 			);
 			path = Models;
@@ -345,11 +345,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA51392C242107F500044D6A /* FavoriteViewController.swift in Sources */,
-				BAED0431242BA9E600DCA115 /* FavoriteGif+CoreDataClass.swift in Sources */,
+				BAED0431242BA9E600DCA115 /* Gif+CoreDataClass.swift in Sources */,
 				BA51392A242107F500044D6A /* SearchViewController.swift in Sources */,
 				BAC0B90A242E440100B6FEBC /* Pagination.swift in Sources */,
 				BAC09929242A3160004D2F96 /* NetworkError.swift in Sources */,
-				BAED0432242BA9E600DCA115 /* FavoriteGif+CoreDataProperties.swift in Sources */,
+				BAED0432242BA9E600DCA115 /* Gif+CoreDataProperties.swift in Sources */,
 				BA513926242107F500044D6A /* AppDelegate.swift in Sources */,
 				BAC0992C242A366B004D2F96 /* DynamicHeightCollectionViewLayout.swift in Sources */,
 				BAA20590242A50AF0025C73E /* GifCollectionViewCell.swift in Sources */,
