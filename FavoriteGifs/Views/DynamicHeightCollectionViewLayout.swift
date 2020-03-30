@@ -46,9 +46,11 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
         return collectionView!.bounds.width - (insets.left + insets.right)
     }
     
-    fileprivate var cellAttributeCache = [UICollectionViewLayoutAttributes]()
+    private var cellAttributeCache = [UICollectionViewLayoutAttributes]()
     
-    fileprivate(set) var contentHeight: CGFloat = 0.0
+    private(set) var contentHeight: CGFloat = 0.0
+    
+    private var footerAttributes: UICollectionViewLayoutAttributes!
     
     override public func prepare() {
         
@@ -101,6 +103,36 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
                 
                 column = columnWithLeastHeight
             }
+        }
+        
+        let sectionFooterAttributes = UICollectionViewLayoutAttributes(
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+          with: IndexPath(item: 1, section: 0))
+        
+        prepareElement(
+          size: CGSize(width: contentWidth, height: 50), attributes: sectionFooterAttributes)
+        
+        cellAttributeCache.append(footerAttributes)
+    }
+
+    
+    private func prepareElement(size: CGSize, attributes: UICollectionViewLayoutAttributes) {
+        guard size != .zero else { return }
+        
+        let initialOrigin = CGPoint(x: 0, y: contentHeight)
+        attributes.frame = CGRect(origin: initialOrigin, size: size)
+        
+        contentHeight = attributes.frame.maxY
+        
+        footerAttributes = attributes
+    }
+    
+    override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        switch elementKind {
+        case UICollectionView.elementKindSectionFooter:
+          return footerAttributes
+        default:
+          return nil
         }
     }
     

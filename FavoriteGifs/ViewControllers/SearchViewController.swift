@@ -15,6 +15,7 @@ class SearchViewController: UIViewController {
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
     private let activityIndicator = UIActivityIndicatorView(style: .medium)
     private let activityIndicatorBackgroundView = UIView(frame: .zero)
+    private let footerView = UIActivityIndicatorView(style: .medium)
     
     private var gifs = [Gif]()
     private var pagination: Pagination?
@@ -83,6 +84,8 @@ class SearchViewController: UIViewController {
             self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
             self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor)
         ])
+        
+        collectionView.register(CollectionViewFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "Footer")
     }
     
     private func setupSearchController() {
@@ -127,6 +130,8 @@ extension SearchViewController: UISearchResultsUpdating {
             if !self.isPaging {
                 self.activityIndicatorBackgroundView.backgroundColor = self.view.backgroundColor
                 self.activityIndicator.startAnimating()
+            } else {
+                self.footerView.startAnimating()
             }
         }
                 
@@ -202,6 +207,17 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
 
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionFooter {
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: indexPath)
+            footer.addSubview(footerView)
+            footerView.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 50)
+            return footer
+        }
+        return UICollectionReusableView()
+    }
 }
 
 // MARK: - DynamicHeightCollectionViewLayout
@@ -212,3 +228,12 @@ extension SearchViewController: DynamicHeightCollectionViewLayoutDelegate {
     }
 }
 
+public class CollectionViewFooterView: UICollectionReusableView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
