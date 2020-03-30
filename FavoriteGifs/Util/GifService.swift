@@ -15,7 +15,7 @@ class GifService {
     
     var completion: ((Result<([Gif], Pagination), Error>) -> Void)!
     
-    func gifs(dataTaskManager: DataTaskManager, query: String, offset: Int, completion: @escaping ((Result<([Gif], Pagination), Error>) -> Void))  {
+    func gifs(query: String, offset: Int, completion: @escaping ((Result<([Gif], Pagination), Error>) -> Void))  {
         var components = URLComponents(string: "https://api.giphy.com/v1/gifs/search")!
         components.queryItems = [
             URLQueryItem(name: "api_key", value: "ozncenAXiDpWKYfF0pFB6M9ajxV5K3BU")
@@ -24,8 +24,8 @@ class GifService {
         ]
         
         let request = URLRequest(url: components.url!)
-        dataTaskManager.delegate = self
-        dataTaskManager.resumeDataTask(request: request)
+        DataTaskManager.shared.delegate = self
+        DataTaskManager.shared.resumeDataTask(request: request)
         self.completion = completion
     }
 }

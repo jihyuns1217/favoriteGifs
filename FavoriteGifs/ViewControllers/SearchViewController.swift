@@ -21,9 +21,7 @@ class SearchViewController: UIViewController {
     
     private var isLoading = false
     private var isPaging = false
-    
-    private var dataTaskManager = DataTaskManager.shared
-    
+        
     private var searchCoalesceTimer: Timer? {
         willSet {
             if searchCoalesceTimer?.isValid == true {
@@ -122,7 +120,7 @@ extension SearchViewController: UISearchResultsUpdating {
         }
         isLoading = true
                 
-        GifService.shared.gifs(dataTaskManager: dataTaskManager, query: searchText, offset: self.gifs.count) { [weak self] (result) in
+        GifService.shared.gifs(query: searchText, offset: self.gifs.count) { [weak self] (result) in
             guard let self = self else {
                 return
             }
