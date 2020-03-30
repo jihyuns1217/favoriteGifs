@@ -26,7 +26,7 @@ class DataTaskManager: NSObject {
     private var expectedContentLength: Int = 0
     private var receivedData: Data?
     
-    var dataTask:URLSessionDataTask?
+    private var dataTask:URLSessionDataTask?
     
     private override init() {
         super.init()
