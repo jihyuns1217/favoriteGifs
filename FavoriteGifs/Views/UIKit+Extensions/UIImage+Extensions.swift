@@ -84,49 +84,17 @@ extension UIImage {
         return delay
     }
     
-    static private func gcdForPair(_ a: Int?, _ b: Int?) -> Int {
-        var a = a
-        var b = b
-        if b == nil || a == nil {
-            if b != nil {
-                return b!
-            } else if a != nil {
-                return a!
-            } else {
-                return 0
-            }
-        }
-        
-        if a! < b! {
-            let c = a
-            a = b
-            b = c
-        }
-        
-        var rest: Int
-        while true {
-            rest = a! % b!
-            
-            if rest == 0 {
-                return b!
-            } else {
-                a = b
-                b = rest
-            }
-        }
-    }
-    
     static private func gcdForArray(_ array: Array<Int>) -> Int {
         if array.isEmpty {
             return 1
         }
         
-        var gcd = array[0]
+        var gcdOfArray = array[0]
         
         for val in array {
-            gcd = UIImage.gcdForPair(val, gcd)
+            gcdOfArray = gcd(val, gcdOfArray)
         }
         
-        return gcd
+        return gcdOfArray
     }
 }
