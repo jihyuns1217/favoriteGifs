@@ -15,13 +15,13 @@ class DataController: NSObject {
     static var shared: DataController = DataController.init {
     }
     
-    var persistentContainer: NSPersistentContainer
+    var persistentContainer: NSPersistentCloudKitContainer
     
     private init(completionClosure: @escaping () -> ()) {
-        persistentContainer = NSPersistentContainer(name: "FavoriteGifs")
+        persistentContainer = NSPersistentCloudKitContainer(name: "FavoriteGifs")
         persistentContainer.loadPersistentStores(completionHandler: {(description, error) in
             if let error = error {
-                fatalError("Failed to load Core Data Stack: \(error)")
+                fatalError("Unresolved error \(error), \(error.userInfo)")
             }
             completionClosure()
         })
