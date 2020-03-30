@@ -44,9 +44,25 @@ class FavoriteViewController: UIViewController {
         let button = UIBarButtonItem(title: "Remove All", style: .plain, target: self, action: #selector(removeAll))
         navigationItem.setRightBarButton(button, animated: true)
         
+        setupRefreshControl()
+    }
+    
+    // MARK: - Private Methods
+    private func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
-        collectionView.refreshControl = refreshControl
+        
+        var frame = collectionView.bounds
+        frame.origin.y = -frame.size.height
+        let backgroundView = UIView(frame: frame)
+        backgroundView.autoresizingMask = .flexibleWidth
+        backgroundView.backgroundColor = view.backgroundColor
+        
+        collectionView.bounces = true
+        refreshControl.backgroundColor = view.backgroundColor
         refreshControl.addTarget(self, action: #selector(getGifs), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+        
+        collectionView.insertSubview(backgroundView, at: 0)
     }
     
     @objc private func getGifs() {
