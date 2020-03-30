@@ -37,7 +37,7 @@ extension UIImage {
             return sum
         }()
         
-        let gcd = gcdForArray(delays)
+        let gcd = delays.gcd()
         var frames = [UIImage]()
         
         var frame: UIImage
@@ -82,19 +82,5 @@ extension UIImage {
         }
         
         return delay
-    }
-    
-    static private func gcdForArray(_ array: Array<Int>) -> Int {
-        if array.isEmpty {
-            return 1
-        }
-        
-        var gcdOfArray = array[0]
-        
-        for val in array {
-            gcdOfArray = gcd(val, gcdOfArray)
-        }
-        
-        return gcdOfArray
     }
 }

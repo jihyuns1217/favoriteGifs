@@ -30,3 +30,19 @@ func gcd(_ a: Int, _ b: Int) -> Int {
         }
     }
 }
+
+extension Array where Element == Int {
+    func gcd() -> Int {
+        if isEmpty {
+            return 1
+        }
+        
+        var gcdOfArray = self[0]
+        
+        for value in self {
+            gcdOfArray = FavoriteGifs.gcd(value, gcdOfArray)
+        }
+                
+        return gcdOfArray
+    }
+}
