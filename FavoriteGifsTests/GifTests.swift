@@ -20,6 +20,7 @@ class GifTests: XCTestCase {
     }
 
     func testGifs_doNotInsertToContext() throws {
+        // Given
         dataTaskManager.data = """
         {
             "data": [
@@ -78,9 +79,11 @@ class GifTests: XCTestCase {
         }
         """.data(using: .utf8)
         
+        // When
         GifService.shared.gifs(query: "", offset: 0) { (result) in
         }
         
+        // Then
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Gif.self))
         let count = try DataController.shared.persistentContainer.viewContext.count(for: fetchRequest)
         XCTAssertEqual(count, 0)
