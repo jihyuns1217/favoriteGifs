@@ -8,20 +8,11 @@
 
 import Foundation
 
-func gcd(_ a: Int?, _ b: Int?) -> Int {
+func gcd(_ a: Int, _ b: Int) -> Int {
     var a = a
     var b = b
-    if b == nil || a == nil {
-        if b != nil {
-            return b!
-        } else if a != nil {
-            return a!
-        } else {
-            return 0
-        }
-    }
     
-    if a! < b! {
+    if a < b {
         let c = a
         a = b
         b = c
@@ -29,10 +20,10 @@ func gcd(_ a: Int?, _ b: Int?) -> Int {
     
     var rest: Int
     while true {
-        rest = a! % b!
+        rest = a % b
         
         if rest == 0 {
-            return b!
+            return b
         } else {
             a = b
             b = rest
