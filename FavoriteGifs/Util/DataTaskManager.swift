@@ -34,7 +34,6 @@ class DataTaskManager: NSObject {
     }
     
     func resumeDataTask(request: URLRequest) {
-        
         receivedData = nil
         dataTask = session.dataTask(with: request)
         dataTask!.resume()

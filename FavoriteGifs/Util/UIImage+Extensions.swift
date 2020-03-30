@@ -12,7 +12,7 @@ import Foundation
 import UIKit
 
 extension UIImage {
-    class func animatedImageWithSource(_ source: CGImageSource) -> UIImage? {
+    static func animatedImageWithSource(_ source: CGImageSource) -> UIImage? {
         let count = CGImageSourceGetCount(source)
         var images = [CGImage]()
         var delays = [Int]()
@@ -57,7 +57,7 @@ extension UIImage {
         return animation
     }
     
-    class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
+    static private func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
         var delay = 0.1
         
         let cfProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil)
@@ -84,7 +84,7 @@ extension UIImage {
         return delay
     }
     
-    class func gcdForPair(_ a: Int?, _ b: Int?) -> Int {
+    static private func gcdForPair(_ a: Int?, _ b: Int?) -> Int {
         var a = a
         var b = b
         if b == nil || a == nil {
@@ -116,7 +116,7 @@ extension UIImage {
         }
     }
     
-    class func gcdForArray(_ array: Array<Int>) -> Int {
+    static private func gcdForArray(_ array: Array<Int>) -> Int {
         if array.isEmpty {
             return 1
         }

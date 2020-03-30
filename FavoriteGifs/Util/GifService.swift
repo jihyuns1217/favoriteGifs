@@ -87,6 +87,4 @@ extension GifService: DataTaskManagerDelegate {
                         completion(.failure(error))
                     }
     }
-    
-    
 }

@@ -16,13 +16,13 @@ class SearchViewController: UIViewController {
     private let topProgressView = UIProgressView(progressViewStyle: .bar)
     private let bottomProgressView = UIProgressView(progressViewStyle: .bar)
     
-    var gifs = [Gif]()
+    private var gifs = [Gif]()
     private var pagination: Pagination?
     
     private var isLoading = false
     private var isPaging = false
     
-    var dataTaskManager = DataTaskManager.shared
+    private var dataTaskManager = DataTaskManager.shared
     
     private var searchCoalesceTimer: Timer? {
         willSet {
