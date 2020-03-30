@@ -61,7 +61,7 @@ class SearchViewController: UIViewController {
                 }
                 
                 isPaging = true
-                getData(searchText: searchText)
+                getGifs(searchText: searchText)
             }
         }
     }
@@ -117,7 +117,7 @@ class SearchViewController: UIViewController {
 }
 
 extension SearchViewController: UISearchResultsUpdating {
-    fileprivate func getData(searchText: String) {
+    private func getGifs(searchText: String) {
         guard !isLoading else {
             return
         }
@@ -149,7 +149,6 @@ extension SearchViewController: UISearchResultsUpdating {
                     }
                 }
                 
-                
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
@@ -173,7 +172,7 @@ extension SearchViewController: UISearchResultsUpdating {
         searchCoalesceTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [unowned self] _ in
             self.pagination = nil
             self.isPaging = false
-            self.getData(searchText: searchText)
+            self.getGifs(searchText: searchText)
         })
     }
 }
@@ -186,30 +185,27 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: GifCollectionViewCell.self), for: indexPath) as! GifCollectionViewCell
-        
         cell.imageView.setGif(url: gifs[indexPath.item].url)
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
         detailViewController.gif = gifs[indexPath.item]
-        
+
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 
 // MARK: - DynamicHeightCollectionViewLayout
 extension SearchViewController: DynamicHeightCollectionViewLayoutDelegate {
-    
      func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
         let height = width * CGFloat(gifs[indexPath.item].aspectRatio)
-        
         return height
     }
 }
 
+// MARK: - ProgressBarDelegate
 extension SearchViewController: ProgressBarDelegate {
     func progressRateChanged(progressRate: Float) {
         if isPaging {
@@ -217,7 +213,6 @@ extension SearchViewController: ProgressBarDelegate {
         } else {
             topProgressView.progress = progressRate
         }
-        
     }
 }
 

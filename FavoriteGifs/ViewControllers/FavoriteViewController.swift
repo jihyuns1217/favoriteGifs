@@ -46,7 +46,7 @@ class FavoriteViewController: UIViewController {
         
         let refreshControl = UIRefreshControl()
         collectionView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(getData), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(getGifs), for: .valueChanged)
     }
     
     @objc private func getData() {
