@@ -13,9 +13,10 @@ class SearchViewController: UIViewController {
     private let searchController = UISearchController(searchResultsController: nil)
     private let searchContainerView: UIView = UIView(frame: .zero)
     private var collectionView = GifsCollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
-    private let activityIndicator = UIActivityIndicatorView(style: .medium)
+    
+    private let topIndicatorView = UIActivityIndicatorView(style: .medium)
     private let activityIndicatorBackgroundView = UIView(frame: .zero)
-    private let footerView = UIActivityIndicatorView(style: .medium)
+    private let footerIndicatorView = UIActivityIndicatorView(style: .medium)
     
     private var gifs = [Gif]()
     private var pagination: Pagination?
@@ -104,12 +105,12 @@ class SearchViewController: UIViewController {
         ])
         
         
-        activityIndicatorBackgroundView.addSubview(activityIndicator)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorBackgroundView.addSubview(topIndicatorView)
+        topIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            activityIndicator.topAnchor.constraint(equalTo: activityIndicatorBackgroundView.topAnchor, constant: 20),
-            activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorBackgroundView.centerXAnchor)
+            topIndicatorView.topAnchor.constraint(equalTo: activityIndicatorBackgroundView.topAnchor, constant: 20),
+            topIndicatorView.centerXAnchor.constraint(equalTo: activityIndicatorBackgroundView.centerXAnchor)
         ])
         
     }
@@ -124,9 +125,9 @@ extension SearchViewController: UISearchResultsUpdating {
         DispatchQueue.main.async {
             if !self.isPaging {
                 self.activityIndicatorBackgroundView.backgroundColor = self.view.backgroundColor
-                self.activityIndicator.startAnimating()
+                self.topIndicatorView.startAnimating()
             } else {
-                self.footerView.startAnimating()
+                self.footerIndicatorView.startAnimating()
             }
         }
                 
@@ -141,9 +142,9 @@ extension SearchViewController: UISearchResultsUpdating {
                         self.collectionView.setContentOffset(.zero, animated: false)
                         
                         self.activityIndicatorBackgroundView.backgroundColor = .clear
-                        self.activityIndicator.stopAnimating()
+                        self.topIndicatorView.stopAnimating()
                     } else {
-                        self.footerView.stopAnimating()
+                        self.footerIndicatorView.stopAnimating()
                     }
                     
                     self.isLoading = false
@@ -218,8 +219,8 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionFooter {
             let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewFooterView.reuseIdentifier, for: indexPath)
-            footer.addSubview(footerView)
-            footerView.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 50)
+            footer.addSubview(footerIndicatorView)
+            footerIndicatorView.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 50)
             return footer
         }
         return UICollectionReusableView()
