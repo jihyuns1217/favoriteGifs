@@ -11,7 +11,7 @@ import UIKit
 class SearchViewController: UIViewController {
     
     private let searchController = UISearchController(searchResultsController: nil)
-    private let searchContainerView: UIView = UIView(frame: CGRect.zero)
+    private let searchContainerView: UIView = UIView(frame: .zero)
     private var collectionView = GifsCollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
     private let activityIndicator = UIActivityIndicatorView(style: .medium)
     private let activityIndicatorBackgroundView = UIView(frame: .zero)
@@ -223,15 +223,5 @@ extension SearchViewController: DynamicHeightCollectionViewLayoutDelegate {
      func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
         let height = width * CGFloat(gifs[indexPath.item].aspectRatio)
         return height
-    }
-}
-
-public class CollectionViewFooterView: UICollectionReusableView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
