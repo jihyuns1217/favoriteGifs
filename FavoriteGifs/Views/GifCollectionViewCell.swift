@@ -8,12 +8,14 @@
 
 import UIKit
 
-class GifCollectionViewCell: UICollectionViewCell {
+class GifCollectionViewCell: UICollectionViewCell {    
     var imageView: UIImageView!
+    
+    var onReuse: () -> Void = {}
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+        onReuse()
         imageView.image = nil
     }
 

@@ -222,7 +222,23 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(forIndexPath: indexPath) as GifCollectionViewCell
-        cell.imageView.setGif(url: gifs[indexPath.item].url)
+        
+        let token = ImageLoader.shared.loadImage(gifs[indexPath.item].url) { result in
+            do {
+                let image = try result.get()
+                DispatchQueue.main.async {
+                    cell.imageView.image = image
+                }
+            } catch {
+                print(error)
+            }
+        }
+        
+        cell.onReuse = {
+            if let token = token {
+                ImageLoader.shared.cancelLoad(token)
+            }
+        }
         return cell
     }
     
