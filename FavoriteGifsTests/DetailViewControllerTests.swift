@@ -19,7 +19,7 @@ class DetailViewControllerTests: XCTestCase {
         DataController.shared.removeAll()
     }
 
-    func testDidSelectHeart_addToFavoriteGif() {
+    func testToggleIsFavorite_favoriteIsFalse_addToFavoriteGif() {
         // Given
         let gif = Gif(entity: NSEntityDescription.entity(forEntityName: String(describing: Gif.self), in: DataController.shared.persistentContainer.viewContext)!, insertInto: nil)
         gif.aspectRatio = 1
