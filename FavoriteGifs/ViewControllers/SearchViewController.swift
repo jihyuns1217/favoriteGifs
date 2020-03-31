@@ -224,13 +224,10 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         let cell = collectionView.dequeueReusableCell(forIndexPath: indexPath) as GifCollectionViewCell
         
         let token = ImageLoader.shared.loadImage(gifs[indexPath.item].url) { result in
-            do {
-                let image = try result.get()
+            if let image = try? result.get() {
                 DispatchQueue.main.async {
                     cell.imageView.image = image
                 }
-            } catch {
-                print(error)
             }
         }
         
