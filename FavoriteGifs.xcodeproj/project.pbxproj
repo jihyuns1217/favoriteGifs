@@ -16,7 +16,6 @@
 		BA513932242107F500044D6A /* FavoriteGifs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA513930242107F500044D6A /* FavoriteGifs.xcdatamodeld */; };
 		BA513934242107F800044D6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA513933242107F800044D6A /* Assets.xcassets */; };
 		BA513937242107F800044D6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA513935242107F800044D6A /* LaunchScreen.storyboard */; };
-		BA51394D242107F800044D6A /* FavoriteGifsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA51394C242107F800044D6A /* FavoriteGifsUITests.swift */; };
 		BA56B320242B9DCE00E6DBB0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA56B31F242B9DCE00E6DBB0 /* DetailViewController.swift */; };
 		BA5D797E2433480700A81834 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D797D2433480700A81834 /* ImageLoader.swift */; };
 		BA6759192432FB13007DE113 /* GifsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6759182432FB13007DE113 /* GifsCollectionView.swift */; };
@@ -44,13 +43,6 @@
 			remoteGlobalIDString = BA513921242107F500044D6A;
 			remoteInfo = FavoriteGifs;
 		};
-		BA513949242107F800044D6A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BA51391A242107F500044D6A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BA513921242107F500044D6A;
-			remoteInfo = FavoriteGifs;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -67,9 +59,6 @@
 		BA513938242107F800044D6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA51393D242107F800044D6A /* FavoriteGifsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FavoriteGifsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA513943242107F800044D6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BA513948242107F800044D6A /* FavoriteGifsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FavoriteGifsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA51394C242107F800044D6A /* FavoriteGifsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGifsUITests.swift; sourceTree = "<group>"; };
-		BA51394E242107F800044D6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA56B31F242B9DCE00E6DBB0 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		BA5D797D2433480700A81834 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		BA6759182432FB13007DE113 /* GifsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifsCollectionView.swift; sourceTree = "<group>"; };
@@ -104,13 +93,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BA513945242107F800044D6A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -139,7 +121,6 @@
 			children = (
 				BA513924242107F500044D6A /* FavoriteGifs */,
 				BA513940242107F800044D6A /* FavoriteGifsTests */,
-				BA51394B242107F800044D6A /* FavoriteGifsUITests */,
 				BA513923242107F500044D6A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -149,7 +130,6 @@
 			children = (
 				BA513922242107F500044D6A /* FavoriteGifs.app */,
 				BA51393D242107F800044D6A /* FavoriteGifsTests.xctest */,
-				BA513948242107F800044D6A /* FavoriteGifsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -181,15 +161,6 @@
 				BAC0B9132430DE5E00B6FEBC /* GifTests.swift */,
 			);
 			path = FavoriteGifsTests;
-			sourceTree = "<group>";
-		};
-		BA51394B242107F800044D6A /* FavoriteGifsUITests */ = {
-			isa = PBXGroup;
-			children = (
-				BA51394C242107F800044D6A /* FavoriteGifsUITests.swift */,
-				BA51394E242107F800044D6A /* Info.plist */,
-			);
-			path = FavoriteGifsUITests;
 			sourceTree = "<group>";
 		};
 		BAC09924242A2A25004D2F96 /* Models */ = {
@@ -271,24 +242,6 @@
 			productReference = BA51393D242107F800044D6A /* FavoriteGifsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		BA513947242107F800044D6A /* FavoriteGifsUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BA513957242107F800044D6A /* Build configuration list for PBXNativeTarget "FavoriteGifsUITests" */;
-			buildPhases = (
-				BA513944242107F800044D6A /* Sources */,
-				BA513945242107F800044D6A /* Frameworks */,
-				BA513946242107F800044D6A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BA51394A242107F800044D6A /* PBXTargetDependency */,
-			);
-			name = FavoriteGifsUITests;
-			productName = FavoriteGifsUITests;
-			productReference = BA513948242107F800044D6A /* FavoriteGifsUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -303,10 +256,6 @@
 						CreatedOnToolsVersion = 11.3.1;
 					};
 					BA51393C242107F800044D6A = {
-						CreatedOnToolsVersion = 11.3.1;
-						TestTargetID = BA513921242107F500044D6A;
-					};
-					BA513947242107F800044D6A = {
 						CreatedOnToolsVersion = 11.3.1;
 						TestTargetID = BA513921242107F500044D6A;
 					};
@@ -327,7 +276,6 @@
 			targets = (
 				BA513921242107F500044D6A /* FavoriteGifs */,
 				BA51393C242107F800044D6A /* FavoriteGifsTests */,
-				BA513947242107F800044D6A /* FavoriteGifsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -344,13 +292,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BA51393B242107F800044D6A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BA513946242107F800044D6A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -397,14 +338,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BA513944242107F800044D6A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BA51394D242107F800044D6A /* FavoriteGifsUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -412,11 +345,6 @@
 			isa = PBXTargetDependency;
 			target = BA513921242107F500044D6A /* FavoriteGifs */;
 			targetProxy = BA51393E242107F800044D6A /* PBXContainerItemProxy */;
-		};
-		BA51394A242107F800044D6A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BA513921242107F500044D6A /* FavoriteGifs */;
-			targetProxy = BA513949242107F800044D6A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -634,46 +562,6 @@
 			};
 			name = Release;
 		};
-		BA513958242107F800044D6A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZG4AJ93ZN7;
-				INFOPLIST_FILE = FavoriteGifsUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.doInsight.FavoriteGifsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = FavoriteGifs;
-			};
-			name = Debug;
-		};
-		BA513959242107F800044D6A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZG4AJ93ZN7;
-				INFOPLIST_FILE = FavoriteGifsUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.doInsight.FavoriteGifsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = FavoriteGifs;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -700,15 +588,6 @@
 			buildConfigurations = (
 				BA513955242107F800044D6A /* Debug */,
 				BA513956242107F800044D6A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BA513957242107F800044D6A /* Build configuration list for PBXNativeTarget "FavoriteGifsUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BA513958242107F800044D6A /* Debug */,
-				BA513959242107F800044D6A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
