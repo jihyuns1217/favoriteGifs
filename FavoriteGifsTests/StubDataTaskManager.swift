@@ -12,7 +12,8 @@ import Foundation
 class StubDataTaskManager: DataTaskManager {
     var data: Data!
     
-    override func resumeDataTask(request: URLRequest, completion: @escaping ((Result<Data, Error>) -> Void)) {
+    override func resumeDataTask(request: URLRequest, completion: @escaping ((Result<Data, Error>) -> Void)) -> URLSessionDataTask? {
         completion(.success(data))
+        return nil
     }
 }

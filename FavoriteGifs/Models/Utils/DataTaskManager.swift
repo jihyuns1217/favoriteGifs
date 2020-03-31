@@ -12,7 +12,7 @@ class DataTaskManager: NSObject {
     static var shared: DataTaskManager = DataTaskManager()
     
     @discardableResult
-    func resumeDataTask(request: URLRequest, completion: @escaping ((Result<Data, Error>) -> Void)) -> URLSessionDataTask {
+    func resumeDataTask(request: URLRequest, completion: @escaping ((Result<Data, Error>) -> Void)) -> URLSessionDataTask? {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data,
                 let response = response as? HTTPURLResponse,
@@ -29,7 +29,7 @@ class DataTaskManager: NSObject {
     }
     
     @discardableResult
-    func resumeDataTask(url: URL, completion: @escaping ((Result<Data, Error>) -> Void))  -> URLSessionDataTask {
+    func resumeDataTask(url: URL, completion: @escaping ((Result<Data, Error>) -> Void))  -> URLSessionDataTask? {
         let request = URLRequest(url: url)
         return resumeDataTask(request: request, completion: completion)
     }
