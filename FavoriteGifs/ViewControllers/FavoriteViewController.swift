@@ -11,7 +11,7 @@ import CoreData
 
 class FavoriteViewController: UIViewController {
     
-    private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
+    private var collectionView = GifsCollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
     
     private var gifs = [Gif]()
     
@@ -29,14 +29,11 @@ class FavoriteViewController: UIViewController {
     
     // MARK: - Private Methods
     private func setupCollectionView() {
-        collectionView.backgroundColor = .systemBackground
-
         if let collectionViewLayout = collectionView.collectionViewLayout as? DynamicHeightCollectionViewLayout {
             collectionViewLayout.delegate = self
         }
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: GifCollectionViewCell.reuseIdentifier)
         collectionView.dataSource = self
         collectionView.delegate = self
         view.addSubview(collectionView)

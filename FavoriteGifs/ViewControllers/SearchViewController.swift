@@ -12,7 +12,7 @@ class SearchViewController: UIViewController {
     
     private let searchController = UISearchController(searchResultsController: nil)
     private let searchContainerView: UIView = UIView(frame: CGRect.zero)
-    private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
+    private var collectionView = GifsCollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
     private let activityIndicator = UIActivityIndicatorView(style: .medium)
     private let activityIndicatorBackgroundView = UIView(frame: .zero)
     private let footerView = UIActivityIndicatorView(style: .medium)
@@ -66,15 +66,11 @@ class SearchViewController: UIViewController {
     
     // MARK: - Private Methods
     private func setupCollectionView() {
-        collectionView.backgroundColor = .systemBackground
-        
         if let collectionViewLayout = collectionView.collectionViewLayout as? DynamicHeightCollectionViewLayout {
             collectionViewLayout.delegate = self
-            collectionViewLayout.footerSize = CGSize(width: collectionViewLayout.contentWidth, height: 50)
         }
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: GifCollectionViewCell.reuseIdentifier)
         collectionView.dataSource = self
         collectionView.delegate = self
         view.addSubview(collectionView)
@@ -85,9 +81,6 @@ class SearchViewController: UIViewController {
             view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor)
         ])
-        
-        collectionView.register(CollectionViewFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "Footer")
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
     }
     
     private func setupSearchController() {
