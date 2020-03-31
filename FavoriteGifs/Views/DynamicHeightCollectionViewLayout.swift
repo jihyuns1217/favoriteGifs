@@ -17,7 +17,7 @@ protocol DynamicHeightCollectionViewLayoutDelegate: class {
 class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
     weak var delegate: DynamicHeightCollectionViewLayoutDelegate?
     
-    var padding: CGFloat = 10.0 {
+    var padding: CGFloat = 4.0 {
         didSet {
             invalidateLayout()
         }
@@ -30,11 +30,15 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
     }
     
     var columnWidth: CGFloat {
-        let numberOfPaddingSections = numberOfColumns + 1
-        
-        let availableContentWidth = contentWidth - (CGFloat(numberOfPaddingSections) * padding)
-        
-        return floor(availableContentWidth / CGFloat(numberOfColumns))
+        if numberOfColumns > 1 {
+            let numberOfPaddingSections = numberOfColumns - 1
+            
+            let availableContentWidth = contentWidth - (CGFloat(numberOfPaddingSections) * padding)
+            
+            return floor(availableContentWidth / CGFloat(numberOfColumns))
+        } else {
+            return contentWidth
+        }
     }
     
     var numberOfColumns: Int {
@@ -64,7 +68,11 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
             
             for column in 0..<numberOfColumns
             {
-                xOffset.append((CGFloat(column) * columnWidth) + (CGFloat(column + 1) * padding))
+                if column == 0 {
+                    xOffset.append((CGFloat(column) * columnWidth))
+                } else {
+                    xOffset.append((CGFloat(column) * columnWidth) + (CGFloat(column) * padding))
+                }
             }
             
             var column = 0
