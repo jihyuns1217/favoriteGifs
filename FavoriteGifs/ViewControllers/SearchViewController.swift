@@ -93,6 +93,8 @@ class SearchViewController: UIViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Gifs"
+        searchController.searchBar.delegate = self
+        
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
@@ -189,6 +191,7 @@ class SearchViewController: UIViewController {
     
 }
 
+// MARK: - UISearchResultsUpdating
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text, searchText.count > 0 else {
@@ -200,6 +203,14 @@ extension SearchViewController: UISearchResultsUpdating {
             self.isPaging = false
             self.getGifs(searchText: searchText)
         })
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        gifs.removeAll()
+        collectionView.reloadData()
     }
 }
 
