@@ -18,7 +18,7 @@ class DetailViewControllerTests: XCTestCase {
     override func tearDown() {
         DataController.shared.removeAll()
     }
-
+    
     func testToggleIsFavorite_favoriteIsFalse_addToFavoriteGif() {
         // Given
         let gif = Gif(entity: NSEntityDescription.entity(forEntityName: String(describing: Gif.self), in: DataController.shared.persistentContainer.viewContext)!, insertInto: nil)
@@ -37,7 +37,7 @@ class DetailViewControllerTests: XCTestCase {
         
         // Then
         let savedGif = try? DataController.shared.persistentContainer.viewContext.existingObject(with: gif.objectID)
-       XCTAssertNotNil(savedGif)
+        XCTAssertNotNil(savedGif)
     }
     
     func testToggleIsFavorite_favoriteIsTrue_removeFromFavoriteGif() {
@@ -60,5 +60,5 @@ class DetailViewControllerTests: XCTestCase {
         let savedGif = try? DataController.shared.persistentContainer.viewContext.existingObject(with: gif.objectID)
         XCTAssertNil(savedGif)
     }
-
+    
 }
