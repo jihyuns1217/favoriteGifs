@@ -248,6 +248,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
                     noGifsLabel.isHidden = true
                 }
             } else {
+                noGifsLabel.isHidden = true
                 footer.addSubview(footerIndicatorView)
                 footerIndicatorView.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 50)
             }
