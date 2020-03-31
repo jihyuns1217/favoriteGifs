@@ -119,9 +119,7 @@ class SearchViewController: UIViewController {
         ])
         
     }
-}
-
-extension SearchViewController: UISearchResultsUpdating {
+    
     private func getGifs(searchText: String) {
         guard !isLoading else {
             return
@@ -188,6 +186,10 @@ extension SearchViewController: UISearchResultsUpdating {
         }
     }
     
+    
+}
+
+extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text, searchText.count > 0 else {
             return
