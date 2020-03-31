@@ -83,7 +83,10 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
                 yOffset[index] = contentHeight
             }
             
-            for item in 0..<collectionView!.numberOfItems(inSection: 0)
+            guard let numberOfItems = collectionView!.dataSource?.collectionView(collectionView!, numberOfItemsInSection: 0) else {
+                return
+            }
+            for item in 0..<numberOfItems
             {
                 let indexPath = IndexPath(item: item, section: 0)
                 
