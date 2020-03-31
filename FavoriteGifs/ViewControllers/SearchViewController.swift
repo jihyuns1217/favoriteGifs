@@ -138,8 +138,12 @@ extension SearchViewController: UISearchResultsUpdating {
             defer {
                 self.isLoading = false
                 DispatchQueue.main.async {
-                    self.activityIndicatorBackgroundView.backgroundColor = .clear
-                    self.activityIndicator.stopAnimating()
+                    if !self.isPaging {
+                        self.activityIndicatorBackgroundView.backgroundColor = .clear
+                        self.activityIndicator.stopAnimating()
+                    } else {
+                        self.footerView.stopAnimating()
+                    }
                 }
             }
             
