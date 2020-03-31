@@ -154,14 +154,22 @@ extension SearchViewController: UISearchResultsUpdating {
             case .success(let (gifs, pagination)):
                 self.pagination = pagination
                 if self.isPaging {
-                    self.gifs.append(contentsOf: gifs)
+                    let from = self.gifs.count
+                    let to = self.gifs.count + gifs.count
+                    let nextIndexPaths: [IndexPath] = (from ..< to).map { IndexPath(row: $0, section: 0) }
+                    self.gifs += gifs
+                    DispatchQueue.main.async {
+                        self.collectionView.insertItems(at: nextIndexPaths)
+                    }
+                    
                 } else {
                     self.gifs = gifs
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
                 }
                 
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
+                
             case .failure(let error):
                 let alertController = UIAlertController(title: NSLocalizedString("네트워크 오류", comment: ""), message: error.localizedDescription, preferredStyle: .alert)
                 let defaultAction = UIAlertAction(title: NSLocalizedString("확인", comment: ""), style: .default, handler : nil)
