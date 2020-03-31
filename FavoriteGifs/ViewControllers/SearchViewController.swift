@@ -136,14 +136,17 @@ extension SearchViewController: UISearchResultsUpdating {
             }
             
             defer {
-                self.isLoading = false
                 DispatchQueue.main.async {
                     if !self.isPaging {
+                        self.collectionView.setContentOffset(.zero, animated: false)
+                        
                         self.activityIndicatorBackgroundView.backgroundColor = .clear
                         self.activityIndicator.stopAnimating()
                     } else {
                         self.footerView.stopAnimating()
                     }
+                    
+                    self.isLoading = false
                 }
             }
             
@@ -154,10 +157,6 @@ extension SearchViewController: UISearchResultsUpdating {
                     self.gifs.append(contentsOf: gifs)
                 } else {
                     self.gifs = gifs
-                    
-                    DispatchQueue.main.async {
-                        self.collectionView.setContentOffset(.zero, animated: false)
-                    }
                 }
                 
                 DispatchQueue.main.async {
