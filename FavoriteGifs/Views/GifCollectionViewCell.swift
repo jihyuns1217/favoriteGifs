@@ -29,14 +29,14 @@ class GifCollectionViewCell: UICollectionViewCell {
     
     private func setupView() {
         imageView = UIImageView(frame: .zero)
-        self.contentView.addSubview(imageView)
+        contentView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            self.contentView.topAnchor.constraint(equalTo: self.imageView.topAnchor),
-            self.contentView.bottomAnchor.constraint(equalTo: self.imageView.bottomAnchor),
-            self.contentView.leadingAnchor.constraint(equalTo: self.imageView.leadingAnchor),
-            self.contentView.trailingAnchor.constraint(equalTo: self.imageView.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: imageView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
         ])
     }
 

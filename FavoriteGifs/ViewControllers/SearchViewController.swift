@@ -40,7 +40,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemBackground
         
         setupCollectionView()
         setupSearchController()
@@ -77,13 +77,13 @@ class SearchViewController: UIViewController {
         collectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: GifCollectionViewCell.reuseIdentifier)
         collectionView.dataSource = self
         collectionView.delegate = self
-        self.view.addSubview(collectionView)
+        view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
-            self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor)
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor)
         ])
         
         collectionView.register(CollectionViewFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "Footer")
@@ -136,7 +136,7 @@ extension SearchViewController: UISearchResultsUpdating {
             }
         }
                 
-        Gif.gifs(query: searchText, offset: isPaging ? self.gifs.count : 0) { [weak self] (result) in
+        Gif.gifs(query: searchText, offset: isPaging ? gifs.count : 0) { [weak self] (result) in
             guard let self = self else {
                 return
             }
@@ -206,7 +206,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         let detailViewController = DetailViewController()
         detailViewController.gif = gifs[indexPath.item]
 
-        self.navigationController?.pushViewController(detailViewController, animated: true)
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     

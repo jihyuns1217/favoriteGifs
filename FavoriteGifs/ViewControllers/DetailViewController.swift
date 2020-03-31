@@ -24,23 +24,23 @@ class DetailViewController: UIViewController {
     
     // MARK: - Private Methods
     private func setUpView() {
-        self.view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemBackground
         
         imageView = UIImageView(frame: .zero)
         imageView.contentMode = .scaleAspectFit
-        self.view.addSubview(imageView)
+        view.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            self.view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: self.imageView.topAnchor),
-            self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: self.imageView.bottomAnchor),
-            self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: self.imageView.leadingAnchor),
-            self.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: self.imageView.trailingAnchor),
+            view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: imageView.topAnchor),
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
         ])
     }
     
     private func setUpData() {
-        self.imageView.setGif(url: gif.url)
+        imageView.setGif(url: gif.url)
         
         
         let moc = DataController.shared.persistentContainer.viewContext
