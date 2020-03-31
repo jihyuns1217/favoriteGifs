@@ -11,7 +11,8 @@ import Foundation
 class DataTaskManager: NSObject {
     static var shared: DataTaskManager = DataTaskManager()
     
-    func resumeDataTask(request: URLRequest, completion: @escaping ((Result<Data, Error>) -> Void)) {
+    @discardableResult
+    func resumeDataTask(request: URLRequest, completion: @escaping ((Result<Data, Error>) -> Void)) -> URLSessionDataTask {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data,
                 let response = response as? HTTPURLResponse,
@@ -24,10 +25,12 @@ class DataTaskManager: NSObject {
             completion(.success(data))
         }
         task.resume()
+        return task
     }
     
-    func resumeDataTask(url: URL, completion: @escaping ((Result<Data, Error>) -> Void)) {
+    @discardableResult
+    func resumeDataTask(url: URL, completion: @escaping ((Result<Data, Error>) -> Void))  -> URLSessionDataTask {
         let request = URLRequest(url: url)
-        resumeDataTask(request: request, completion: completion)
+        return resumeDataTask(request: request, completion: completion)
     }
 }

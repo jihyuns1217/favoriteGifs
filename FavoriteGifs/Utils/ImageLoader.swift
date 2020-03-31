@@ -24,25 +24,17 @@ class ImageLoader {
         
         let uuid = UUID()
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            defer {self.runningRequests.removeValue(forKey: uuid) }
-            
-            if let data = data, let source = CGImageSourceCreateWithData(data as CFData, nil), let image = UIImage.animatedImageWithSource(source) {
-                self.loadedImages[url] = image
-                completion(.success(image))
-                return
-            }
-            
-            guard let error = error else {
-                return
-            }
-            
-            guard (error as NSError).code == NSURLErrorCancelled else {
+        let task = DataTaskManager.shared.resumeDataTask(url: url) { (result) in
+            switch result {
+            case .success(let data):
+                if let source = CGImageSourceCreateWithData(data as CFData, nil), let image = UIImage.animatedImageWithSource(source) {
+                    self.loadedImages[url] = image
+                    completion(.success(image))
+                }
+            case .failure(let error):
                 completion(.failure(error))
-                return
             }
         }
-        task.resume()
         
         runningRequests[uuid] = task
         return uuid
