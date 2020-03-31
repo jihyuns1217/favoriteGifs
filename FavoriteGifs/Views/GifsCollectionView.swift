@@ -22,7 +22,7 @@ class GifsCollectionView: UICollectionView {
         register(GifCollectionViewCell.self, forCellWithReuseIdentifier: GifCollectionViewCell.reuseIdentifier)
         
         
-        register(CollectionViewFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "Footer")
+        register(CollectionViewFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: CollectionViewFooterView.reuseIdentifier)
         contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
     }
     
