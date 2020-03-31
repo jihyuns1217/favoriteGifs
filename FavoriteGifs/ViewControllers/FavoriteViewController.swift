@@ -12,6 +12,7 @@ import CoreData
 class FavoriteViewController: UIViewController {
     
     private var collectionView = GifsCollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
+    private let pullToRefreshLabel = UILabel(frame: .zero)
     
     private var gifs = [Gif]()
     
@@ -44,6 +45,9 @@ class FavoriteViewController: UIViewController {
             view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
         ])
+        
+        pullToRefreshLabel.text = NSLocalizedString("Pull To Refresh", comment: "")
+        pullToRefreshLabel.textAlignment = .center
     }
     
     private func setupRemoveAllButton() {
@@ -104,6 +108,21 @@ extension FavoriteViewController: UICollectionViewDataSource, UICollectionViewDe
         detailViewController.gif = gifs[indexPath.item]
         
         navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionFooter {
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewFooterView.reuseIdentifier, for: indexPath)
+            
+            if gifs.isEmpty {
+                footer.addSubview(pullToRefreshLabel)
+                pullToRefreshLabel.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 50)
+            }
+            pullToRefreshLabel.isHidden = !gifs.isEmpty
+            
+            return footer
+        }
+        return UICollectionReusableView()
     }
 }
 
