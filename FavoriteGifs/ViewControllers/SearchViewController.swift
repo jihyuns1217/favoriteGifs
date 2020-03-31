@@ -18,6 +18,8 @@ class SearchViewController: UIViewController {
     private let activityIndicatorBackgroundView = UIView(frame: .zero)
     private let footerIndicatorView = UIActivityIndicatorView(style: .medium)
     
+    private let noGifsLabel = UILabel(frame: .zero)
+    
     private var gifs = [Gif]()
     private var pagination: Pagination?
     
@@ -82,6 +84,9 @@ class SearchViewController: UIViewController {
             view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor)
         ])
+        
+        noGifsLabel.text = NSLocalizedString("No Gifs", comment: "")
+        noGifsLabel.textAlignment = .center
     }
     
     private func setupSearchController() {
@@ -219,8 +224,21 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionFooter {
             let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewFooterView.reuseIdentifier, for: indexPath)
-            footer.addSubview(footerIndicatorView)
-            footerIndicatorView.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 50)
+            
+            if gifs.isEmpty {
+                footer.addSubview(noGifsLabel)
+                noGifsLabel.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 50)
+                if let searchText = searchController.searchBar.text
+                    , !searchText.isEmpty {
+                    noGifsLabel.isHidden = false
+                } else {
+                    noGifsLabel.isHidden = true
+                }
+            } else {
+                footer.addSubview(footerIndicatorView)
+                footerIndicatorView.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 50)
+            }
+            
             return footer
         }
         return UICollectionReusableView()
