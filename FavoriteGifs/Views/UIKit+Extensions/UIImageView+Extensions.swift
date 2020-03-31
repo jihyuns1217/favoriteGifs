@@ -11,22 +11,19 @@ import UIKit
 
 extension UIImageView {
     func setGif(url: URL) {
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if error != nil {
-                return
-            }
-            
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                return
-            }
-            
-            DispatchQueue.main.async {
-                guard let source = CGImageSourceCreateWithData(data! as CFData, nil) else {
-                    print("image doesn't exist")
+        DataTaskManager.shared.resumeDataTask(url: url) { (result) in
+            switch result {
+            case .success(let data):
+                guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
                     return
                 }
-                self.image = UIImage.animatedImageWithSource(source)
+                
+                DispatchQueue.main.async {
+                    self.image = UIImage.animatedImageWithSource(source)
+                }
+            case .failure(_):
+                return
             }
-        }.resume()
+        }
     }
 }

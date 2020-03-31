@@ -25,4 +25,9 @@ class DataTaskManager: NSObject {
         }
         task.resume()
     }
+    
+    func resumeDataTask(url: URL, completion: @escaping ((Result<Data, Error>) -> Void)) {
+        let request = URLRequest(url: url)
+        resumeDataTask(request: request, completion: completion)
+    }
 }
