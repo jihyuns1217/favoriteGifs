@@ -39,5 +39,26 @@ class DetailViewControllerTests: XCTestCase {
         let savedGif = try? DataController.shared.persistentContainer.viewContext.existingObject(with: gif.objectID)
        XCTAssertNotNil(savedGif)
     }
+    
+    func testToggleIsFavorite_favoriteIsTrue_removeFromFavoriteGif() {
+        // Given
+        let gif = NSEntityDescription.insertNewObject(forEntityName: String(describing: Gif.self), into: DataController.shared.persistentContainer.viewContext) as! Gif
+        gif.aspectRatio = 1
+        gif.id = "26ybwyb5dKBiKsZJC"
+        gif.url = URL(string: "https://media0.giphy.com/media/26ybwyb5dKBiKsZJC/200_s.gif?cid=cde4eab81072172ddf261bd763ffd165642cac492a851e67&rid=200_s.gif")!
+        
+        let detailViewController = DetailViewController()
+        detailViewController.gif = gif
+        _ = UINavigationController(rootViewController: detailViewController)
+        detailViewController.loadViewIfNeeded()
+        
+        // When
+        let button = detailViewController.navigationItem.rightBarButtonItem!
+        _ = button.target?.perform(button.action)
+        
+        // Then
+        let savedGif = try? DataController.shared.persistentContainer.viewContext.existingObject(with: gif.objectID)
+        XCTAssertNil(savedGif)
+    }
 
 }
