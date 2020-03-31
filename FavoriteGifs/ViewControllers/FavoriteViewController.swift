@@ -98,7 +98,19 @@ extension FavoriteViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(forIndexPath: indexPath) as GifCollectionViewCell
         
-        cell.imageView.setGif(url: gifs[indexPath.item].url)
+        let token = ImageLoader.shared.loadImage(gifs[indexPath.item].url) { result in
+            if let image = try? result.get() {
+                DispatchQueue.main.async {
+                    cell.imageView.image = image
+                }
+            }
+        }
+        
+        cell.onReuse = {
+            if let token = token {
+                ImageLoader.shared.cancelLoad(token)
+            }
+        }
         
         return cell
     }
