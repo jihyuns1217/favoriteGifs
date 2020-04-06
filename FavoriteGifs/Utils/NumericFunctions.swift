@@ -13,9 +13,7 @@ func gcd(_ a: Int, _ b: Int) -> Int {
     var b = b
     
     if a < b {
-        let c = a
-        a = b
-        b = c
+        swap(&a, &b)
     }
     
     var rest: Int
