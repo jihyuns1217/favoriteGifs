@@ -191,20 +191,20 @@ extension SearchResultViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionFooter {
-            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewFooterView.reuseIdentifier, for: indexPath) as! CollectionViewFooterView
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: GifFooterCollectionReusableView.reuseIdentifier, for: indexPath) as! GifFooterCollectionReusableView
             
             if gifs.isEmpty {
                 if !searchText.isEmpty {
-                    footer.titleLabel.isHidden = false
+                    footerView.titleLabel.isHidden = false
                 } else {
-                    footer.titleLabel.isHidden = true
+                    footerView.titleLabel.isHidden = true
                 }
             } else {
-                footerIndicatorView = footer.footerIndicatorView
-                footer.titleLabel.isHidden = true
+                footerIndicatorView = footerView.footerIndicatorView
+                footerView.titleLabel.isHidden = true
             }
             
-            return footer
+            return footerView
         }
         return UICollectionReusableView()
     }

@@ -18,7 +18,7 @@ class GifsCollectionView: UICollectionView {
         register(GifCollectionViewCell.self, forCellWithReuseIdentifier: GifCollectionViewCell.reuseIdentifier)
         
         
-        register(CollectionViewFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: CollectionViewFooterView.reuseIdentifier)
+        register(GifFooterCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: GifFooterCollectionReusableView.reuseIdentifier)
         contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
     }
     
@@ -26,25 +26,4 @@ class GifsCollectionView: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
     
-}
-
-class CollectionViewFooterView: UICollectionReusableView {
-    let footerIndicatorView = UIActivityIndicatorView(style: .medium)
-    let titleLabel = UILabel(frame: .zero)
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-                
-        titleLabel.text = NSLocalizedString("No Gifs", comment: "")
-        titleLabel.textAlignment = .center
-        
-        addSubview(titleLabel)
-        titleLabel.layoutAttachAll(to: self)
-        addSubview(footerIndicatorView)
-        footerIndicatorView.layoutAttachAll(to: self)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }

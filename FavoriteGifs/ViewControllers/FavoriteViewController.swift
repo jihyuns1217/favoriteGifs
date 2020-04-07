@@ -120,14 +120,14 @@ extension FavoriteViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionFooter {
-            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewFooterView.reuseIdentifier, for: indexPath) as! CollectionViewFooterView
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: GifFooterCollectionReusableView.reuseIdentifier, for: indexPath) as! GifFooterCollectionReusableView
             
             if gifs.isEmpty {
-                footer.titleLabel.text = NSLocalizedString("Pull To Refresh", comment: "")
+                footerView.titleLabel.text = NSLocalizedString("Pull To Refresh", comment: "")
             }
-            footer.titleLabel.isHidden = !gifs.isEmpty
+            footerView.titleLabel.isHidden = !gifs.isEmpty
             
-            return footer
+            return footerView
         }
         return UICollectionReusableView()
     }
