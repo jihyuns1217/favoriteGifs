@@ -123,28 +123,10 @@ extension FavoriteViewController: UICollectionViewDataSource, UICollectionViewDe
         
         navigationController?.pushViewController(detailViewController, animated: true)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionFooter {
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: GifFooterCollectionReusableView.reuseIdentifier, for: indexPath) as! GifFooterCollectionReusableView
-            
-            if gifs.isEmpty {
-                footerView.titleLabel.text = NSLocalizedString("Pull To Refresh", comment: "")
-                footerView.titleLabel.isHidden = false
-            }
-            
-            return footerView
-        }
-        return UICollectionReusableView()
-    }
 }
 
 // MARK: - DynamicHeightCollectionViewLayout
 extension FavoriteViewController: DynamicHeightCollectionViewLayoutDelegate {
-    func collectionViewHeightForFooter(_ collectionView: UICollectionView) -> CGFloat {
-        return 50
-    }
-    
     func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
         let height = width * CGFloat(gifs[indexPath.item].aspectRatio)
         
