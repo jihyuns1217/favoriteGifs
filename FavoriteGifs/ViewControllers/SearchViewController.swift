@@ -15,7 +15,7 @@ class SearchViewController: UIViewController {
     private var collectionView = GifsCollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
     
     private let topIndicatorView = UIActivityIndicatorView(style: .medium)
-    private let activityIndicatorBackgroundView = UIView(frame: .zero)
+    private let topIndicatorBackgroundView = UIView(frame: .zero)
     private let footerIndicatorView = UIActivityIndicatorView(style: .medium)
     
     private let noGifsLabel = UILabel(frame: .zero)
@@ -47,7 +47,7 @@ class SearchViewController: UIViewController {
         
         setupCollectionView()
         setupSearchController()
-        setUpActivityIndicator()
+        setUpTopIndicator()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -99,25 +99,25 @@ class SearchViewController: UIViewController {
         definesPresentationContext = true
     }
     
-    private func setUpActivityIndicator() {
-        activityIndicatorBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicatorBackgroundView.isUserInteractionEnabled = false
-        view.addSubview(activityIndicatorBackgroundView)
+    private func setUpTopIndicator() {
+        topIndicatorBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        topIndicatorBackgroundView.isUserInteractionEnabled = false
+        view.addSubview(topIndicatorBackgroundView)
         
         NSLayoutConstraint.activate([
-            activityIndicatorBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            activityIndicatorBackgroundView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            activityIndicatorBackgroundView.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            activityIndicatorBackgroundView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            topIndicatorBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            topIndicatorBackgroundView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            topIndicatorBackgroundView.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topIndicatorBackgroundView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
         
-        activityIndicatorBackgroundView.addSubview(topIndicatorView)
+        topIndicatorBackgroundView.addSubview(topIndicatorView)
         topIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            topIndicatorView.topAnchor.constraint(equalTo: activityIndicatorBackgroundView.topAnchor, constant: 20),
-            topIndicatorView.centerXAnchor.constraint(equalTo: activityIndicatorBackgroundView.centerXAnchor)
+            topIndicatorView.topAnchor.constraint(equalTo: topIndicatorBackgroundView.topAnchor, constant: 20),
+            topIndicatorView.centerXAnchor.constraint(equalTo: topIndicatorBackgroundView.centerXAnchor)
         ])
         
     }
@@ -129,7 +129,7 @@ class SearchViewController: UIViewController {
         isLoading = true
         DispatchQueue.main.async {
             if !self.isPaging {
-                self.activityIndicatorBackgroundView.backgroundColor = self.view.backgroundColor
+                self.topIndicatorBackgroundView.backgroundColor = self.view.backgroundColor
                 self.topIndicatorView.startAnimating()
             } else {
                 self.footerIndicatorView.startAnimating()
@@ -146,7 +146,7 @@ class SearchViewController: UIViewController {
                     if !self.isPaging {
                         self.collectionView.setContentOffset(.zero, animated: false)
                         
-                        self.activityIndicatorBackgroundView.backgroundColor = .clear
+                        self.topIndicatorBackgroundView.backgroundColor = .clear
                         self.topIndicatorView.stopAnimating()
                     } else {
                         self.footerIndicatorView.stopAnimating()
