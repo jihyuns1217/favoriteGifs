@@ -18,6 +18,8 @@ class DetailViewController: UIViewController {
     private var isFavorite = false
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         setUpView()
         setUpData()
     }
@@ -41,7 +43,6 @@ class DetailViewController: UIViewController {
     
     private func setUpData() {
         imageView.setGif(url: gif.url)
-        
         
         let moc = DataController.shared.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Gif.self))
@@ -75,7 +76,11 @@ class DetailViewController: UIViewController {
             fetchedGifs.removeAll()
             
         } else {
-            DataController.shared.persistentContainer.viewContext.insert(gif)
+            let copiedGif = Gif(entity: NSEntityDescription.entity(forEntityName: String(describing: Gif.self), in: DataController.shared.persistentContainer.viewContext)!, insertInto: nil)
+            copiedGif.aspectRatio = gif.aspectRatio
+            copiedGif.id = gif.id
+            copiedGif.url = gif.url
+            DataController.shared.persistentContainer.viewContext.insert(copiedGif)
         }
         
         DataController.shared.saveContext()

@@ -27,6 +27,12 @@ class FavoriteViewController: UIViewController {
         setupRefreshControl()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        getGifs()
+    }
+    
     // MARK: - Private Methods
     private func setupCollectionView() {
         if let collectionViewLayout = collectionView.collectionViewLayout as? DynamicHeightCollectionViewLayout {
