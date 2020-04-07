@@ -185,7 +185,7 @@ extension SearchResultViewController: UICollectionViewDataSource, UICollectionVi
         let detailViewController = DetailViewController()
         detailViewController.gif = gifs[indexPath.item]
         
-        present(detailViewController, animated: true)
+        presentingViewController?.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     

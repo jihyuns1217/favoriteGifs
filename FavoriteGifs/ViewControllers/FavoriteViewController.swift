@@ -115,7 +115,7 @@ extension FavoriteViewController: UICollectionViewDataSource, UICollectionViewDe
         let detailViewController = DetailViewController()
         detailViewController.gif = gifs[indexPath.item]
         
-        present(detailViewController, animated: true)
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
