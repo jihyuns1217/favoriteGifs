@@ -196,12 +196,10 @@ extension SearchResultViewController: UICollectionViewDataSource, UICollectionVi
             if gifs.isEmpty {
                 if !searchText.isEmpty {
                     footerView.titleLabel.isHidden = false
-                } else {
-                    footerView.titleLabel.isHidden = true
                 }
             } else {
+                footerView.footerIndicatorView.isHidden = false
                 footerIndicatorView = footerView.footerIndicatorView
-                footerView.titleLabel.isHidden = true
             }
             
             return footerView

@@ -124,8 +124,8 @@ extension FavoriteViewController: UICollectionViewDataSource, UICollectionViewDe
             
             if gifs.isEmpty {
                 footerView.titleLabel.text = NSLocalizedString("Pull To Refresh", comment: "")
+                footerView.titleLabel.isHidden = false
             }
-            footerView.titleLabel.isHidden = !gifs.isEmpty
             
             return footerView
         }

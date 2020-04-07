@@ -12,6 +12,11 @@ class GifFooterCollectionReusableView: UICollectionReusableView {
     let footerIndicatorView = UIActivityIndicatorView(style: .medium)
     let titleLabel = UILabel(frame: .zero)
     
+    override func prepareForReuse() {
+        titleLabel.isHidden = true
+        footerIndicatorView.isHidden = true
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
