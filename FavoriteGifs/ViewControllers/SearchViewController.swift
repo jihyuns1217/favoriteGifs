@@ -253,14 +253,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
             
             if gifs.isEmpty {
                 footer.addSubview(noGifsLabel)
-                
-                noGifsLabel.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    noGifsLabel.leadingAnchor.constraint(equalTo: footer.leadingAnchor),
-                    noGifsLabel.trailingAnchor.constraint(equalTo: footer.trailingAnchor),
-                    noGifsLabel.topAnchor.constraint(equalTo: footer.topAnchor),
-                    noGifsLabel.bottomAnchor.constraint(equalTo: footer.bottomAnchor)
-                ])
+                noGifsLabel.layoutAttachAll(to: footer)
                 
                 if let searchText = searchController.searchBar.text
                     , !searchText.isEmpty {
@@ -271,7 +264,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
             } else {
                 noGifsLabel.isHidden = true
                 footer.addSubview(footerIndicatorView)
-                footerIndicatorView.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 50)
+                footerIndicatorView.layoutAttachAll(to: footer)
             }
             
             return footer
