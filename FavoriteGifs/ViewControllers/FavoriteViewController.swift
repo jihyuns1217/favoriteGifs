@@ -59,19 +59,9 @@ class FavoriteViewController: UIViewController {
     
     private func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
-        
-        var frame = collectionView.bounds
-        frame.origin.y = -frame.size.height
-        let backgroundView = UIView(frame: frame)
-        backgroundView.autoresizingMask = .flexibleWidth
-        backgroundView.backgroundColor = view.backgroundColor
-        
-        collectionView.bounces = true
         refreshControl.backgroundColor = view.backgroundColor
         refreshControl.addTarget(self, action: #selector(getGifs), for: .valueChanged)
         collectionView.refreshControl = refreshControl
-        
-        collectionView.insertSubview(backgroundView, at: 0)
     }
     
     @objc private func getGifs() {
