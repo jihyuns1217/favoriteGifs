@@ -12,7 +12,6 @@ import CoreData
 class FavoriteViewController: UIViewController {
     
     private var collectionView = GifsCollectionView(frame: .zero, collectionViewLayout: DynamicHeightCollectionViewLayout())
-    private let pullToRefreshLabel = UILabel(frame: .zero)
     
     private var gifs = [Gif]()
     
@@ -45,9 +44,6 @@ class FavoriteViewController: UIViewController {
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
-        
-        pullToRefreshLabel.text = NSLocalizedString("Pull To Refresh", comment: "")
-        pullToRefreshLabel.textAlignment = .center
     }
     
     private func setupRemoveAllButton() {
@@ -120,17 +116,17 @@ extension FavoriteViewController: UICollectionViewDataSource, UICollectionViewDe
         detailViewController.gif = gifs[indexPath.item]
         
         navigationController?.pushViewController(detailViewController, animated: true)
+        present(detailViewController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionFooter {
-            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewFooterView.reuseIdentifier, for: indexPath)
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewFooterView.reuseIdentifier, for: indexPath) as! CollectionViewFooterView
             
             if gifs.isEmpty {
-                footer.addSubview(pullToRefreshLabel)
-                pullToRefreshLabel.layoutAttachAll(to: footer)
+                footer.titleLabel.text = NSLocalizedString("Pull To Refresh", comment: "")
             }
-            pullToRefreshLabel.isHidden = !gifs.isEmpty
+            footer.titleLabel.isHidden = !gifs.isEmpty
             
             return footer
         }

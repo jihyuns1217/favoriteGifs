@@ -14,9 +14,6 @@ class SearchResultViewController: UIViewController {
     
     private let topIndicatorView = UIActivityIndicatorView(style: .medium)
     private let topIndicatorBackgroundView = UIView(frame: .zero)
-    private let footerIndicatorView = UIActivityIndicatorView(style: .medium)
-    
-    private let noGifsLabel = UILabel(frame: .zero)
     
     var gifs = [Gif]()
     var pagination: Pagination?
@@ -24,6 +21,8 @@ class SearchResultViewController: UIViewController {
     private var isLoading = false
     var isPaging = false
     var searchText: String = ""
+    
+    var footerIndicatorView: UIActivityIndicatorView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,9 +63,6 @@ class SearchResultViewController: UIViewController {
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
-        
-        noGifsLabel.text = NSLocalizedString("No Gifs", comment: "")
-        noGifsLabel.textAlignment = .center
     }
     
     private func setUpTopIndicator() {
@@ -102,7 +98,7 @@ class SearchResultViewController: UIViewController {
                 self.topIndicatorBackgroundView.backgroundColor = self.view.backgroundColor
                 self.topIndicatorView.startAnimating()
             } else {
-                self.footerIndicatorView.startAnimating()
+                self.footerIndicatorView?.startAnimating()
             }
         }
         
@@ -119,7 +115,7 @@ class SearchResultViewController: UIViewController {
                         self.topIndicatorBackgroundView.backgroundColor = .clear
                         self.topIndicatorView.stopAnimating()
                     } else {
-                        self.footerIndicatorView.stopAnimating()
+                        self.footerIndicatorView?.stopAnimating()
                     }
                     
                     self.isLoading = false
@@ -195,21 +191,17 @@ extension SearchResultViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionFooter {
-            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewFooterView.reuseIdentifier, for: indexPath)
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewFooterView.reuseIdentifier, for: indexPath) as! CollectionViewFooterView
             
             if gifs.isEmpty {
-                footer.addSubview(noGifsLabel)
-                noGifsLabel.layoutAttachAll(to: footer)
-                
                 if !searchText.isEmpty {
-                    noGifsLabel.isHidden = false
+                    footer.titleLabel.isHidden = false
                 } else {
-                    noGifsLabel.isHidden = true
+                    footer.titleLabel.isHidden = true
                 }
             } else {
-                noGifsLabel.isHidden = true
-                footer.addSubview(footerIndicatorView)
-                footerIndicatorView.layoutAttachAll(to: footer)
+                footerIndicatorView = footer.footerIndicatorView
+                footer.titleLabel.isHidden = true
             }
             
             return footer
