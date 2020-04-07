@@ -58,7 +58,7 @@ extension SearchViewController: UISearchResultsUpdating {
             guard let searchResultViewController = searchController.searchResultsController as? SearchResultViewController else {
                 return
             }
-            searchResultViewController.searchText = ""
+            searchResultViewController.searchText = searchText
             searchResultViewController.pagination = nil
             searchResultViewController.isPaging = false
             searchResultViewController.getGifs(searchText: searchText)
