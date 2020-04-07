@@ -81,8 +81,8 @@ class SearchViewController: UIViewController {
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor)
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide..leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide..trailingAnchor)
         ])
         
         noGifsLabel.text = NSLocalizedString("No Gifs", comment: "")
@@ -107,8 +107,8 @@ class SearchViewController: UIViewController {
         NSLayoutConstraint.activate([
             topIndicatorBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             topIndicatorBackgroundView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            topIndicatorBackgroundView.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            topIndicatorBackgroundView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            topIndicatorBackgroundView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            topIndicatorBackgroundView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
         
         
