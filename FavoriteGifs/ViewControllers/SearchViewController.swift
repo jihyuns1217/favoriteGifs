@@ -253,7 +253,15 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
             
             if gifs.isEmpty {
                 footer.addSubview(noGifsLabel)
-                noGifsLabel.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 50)
+                
+                noGifsLabel.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    noGifsLabel.leadingAnchor.constraint(equalTo: footer.leadingAnchor),
+                    noGifsLabel.trailingAnchor.constraint(equalTo: footer.trailingAnchor),
+                    noGifsLabel.topAnchor.constraint(equalTo: footer.topAnchor),
+                    noGifsLabel.bottomAnchor.constraint(equalTo: footer.bottomAnchor)
+                ])
+                
                 if let searchText = searchController.searchBar.text
                     , !searchText.isEmpty {
                     noGifsLabel.isHidden = false
@@ -274,6 +282,10 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
 
 // MARK: - DynamicHeightCollectionViewLayout
 extension SearchViewController: DynamicHeightCollectionViewLayoutDelegate {
+    func collectionViewHeightForFooter(_ collectionView: UICollectionView) -> CGFloat {
+        return 50
+    }
+    
      func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
         let height = width * CGFloat(gifs[indexPath.item].aspectRatio)
         return height

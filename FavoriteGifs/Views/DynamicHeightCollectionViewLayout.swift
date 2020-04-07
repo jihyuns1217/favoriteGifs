@@ -12,6 +12,7 @@ import UIKit
 
 protocol DynamicHeightCollectionViewLayoutDelegate: class {
     func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat
+    func collectionViewHeightForFooter(_ collectionView:UICollectionView) -> CGFloat
 }
 
 class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
@@ -49,9 +50,7 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
         let insets = collectionView!.contentInset
         return collectionView!.bounds.width - (insets.left + insets.right)
     }
-    
-    var footerSize: CGSize = .zero
-    
+        
     private var cellAttributeCache = [UICollectionViewLayoutAttributes]()
     
     private(set) var contentHeight: CGFloat = 0.0
@@ -122,8 +121,12 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
           with: IndexPath(item: 1, section: 0))
         
+        guard let footerHeight = delegate?.collectionViewHeightForFooter(collectionView!) else {
+            return
+        }
+        
         prepareElement(
-          size: footerSize, attributes: sectionFooterAttributes)
+            size: CGSize(width: contentWidth, height: footerHeight), attributes: sectionFooterAttributes)
         
         cellAttributeCache.append(footerAttributes)
     }

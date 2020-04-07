@@ -15,10 +15,6 @@ class GifsCollectionView: UICollectionView {
         
         backgroundColor = .systemBackground
         
-        if let collectionViewLayout = collectionViewLayout as? DynamicHeightCollectionViewLayout {
-            collectionViewLayout.footerSize = CGSize(width: collectionViewLayout.contentWidth, height: 50)
-        }
-        
         register(GifCollectionViewCell.self, forCellWithReuseIdentifier: GifCollectionViewCell.reuseIdentifier)
         
         

@@ -140,6 +140,9 @@ extension FavoriteViewController: UICollectionViewDataSource, UICollectionViewDe
 
 // MARK: - DynamicHeightCollectionViewLayout
 extension FavoriteViewController: DynamicHeightCollectionViewLayoutDelegate {
+    func collectionViewHeightForFooter(_ collectionView: UICollectionView) -> CGFloat {
+        return 50
+    }
     
      func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
         let height = width * CGFloat(gifs[indexPath.item].aspectRatio)
