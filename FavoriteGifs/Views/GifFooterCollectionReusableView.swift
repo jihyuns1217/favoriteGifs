@@ -13,8 +13,9 @@ class GifFooterCollectionReusableView: UICollectionReusableView {
     let titleLabel = UILabel(frame: .zero)
     
     override func prepareForReuse() {
-        titleLabel.isHidden = true
-        footerIndicatorView.isHidden = true
+        super.prepareForReuse()
+        
+        hideViews()
     }
     
     override init(frame: CGRect) {
@@ -27,9 +28,16 @@ class GifFooterCollectionReusableView: UICollectionReusableView {
         titleLabel.layoutAttachAll(to: self)
         addSubview(footerIndicatorView)
         footerIndicatorView.layoutAttachAll(to: self)
+        
+        hideViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func hideViews() {
+        titleLabel.isHidden = true
+        footerIndicatorView.isHidden = true
     }
 }
