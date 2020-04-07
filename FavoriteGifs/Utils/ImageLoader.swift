@@ -15,6 +15,10 @@ class ImageLoader {
     private var loadedImages = [URL: UIImage]()
     private var runningRequests = [UUID: URLSessionDataTask]()
     
+    func clearImages() {
+        loadedImages.removeAll()
+    }
+    
     func loadImage(_ url: URL, _ completion: @escaping (Result<UIImage, Error>) -> Void) -> UUID? {
         
         if let image = loadedImages[url] {
