@@ -25,7 +25,7 @@ class SearchViewController: UIViewController {
     
     private var isLoading = false
     private var isPaging = false
-        
+    
     private var searchCoalesceTimer: Timer? {
         willSet {
             if searchCoalesceTimer?.isValid == true {
@@ -135,7 +135,7 @@ class SearchViewController: UIViewController {
                 self.footerIndicatorView.startAnimating()
             }
         }
-                
+        
         Gif.gifs(query: searchText, offset: isPaging ? gifs.count : 0) { [weak self] (result) in
             guard let self = self else {
                 return
@@ -180,7 +180,7 @@ class SearchViewController: UIViewController {
                 let alertController = UIAlertController(title: NSLocalizedString("네트워크 오류", comment: ""), message: error.localizedDescription, preferredStyle: .alert)
                 let defaultAction = UIAlertAction(title: NSLocalizedString("확인", comment: ""), style: .default, handler : nil)
                 alertController.addAction(defaultAction)
-
+                
                 DispatchQueue.main.async {
                     self.present(alertController, animated: true)
                 }
@@ -242,7 +242,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
         detailViewController.gif = gifs[indexPath.item]
-
+        
         navigationController?.pushViewController(detailViewController, animated: true)
     }
     
@@ -286,7 +286,7 @@ extension SearchViewController: DynamicHeightCollectionViewLayoutDelegate {
         return 50
     }
     
-     func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
+    func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
         let height = width * CGFloat(gifs[indexPath.item].aspectRatio)
         return height
     }

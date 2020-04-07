@@ -22,7 +22,7 @@ class FavoriteViewController: UIViewController {
         getGifs()
         
         view.backgroundColor = .systemBackground
-                
+        
         setupCollectionView()
         setupRemoveAllButton()
         setupRefreshControl()
@@ -144,7 +144,7 @@ extension FavoriteViewController: DynamicHeightCollectionViewLayoutDelegate {
         return 50
     }
     
-     func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
+    func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
         let height = width * CGFloat(gifs[indexPath.item].aspectRatio)
         
         return height
