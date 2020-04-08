@@ -8,15 +8,23 @@
 
 import UIKit
 
-class GifFooterCollectionReusableView: UICollectionReusableView {
+class IndicatorCollectionReusableView: UICollectionReusableView {
     let footerIndicatorView = UIActivityIndicatorView(style: .medium)
-    let titleLabel = UILabel(frame: .zero)
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        hideViews()
+        addSubview(footerIndicatorView)
+        footerIndicatorView.layoutAttachAll(to: self)
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class NoGifsCollectionReusableView: UICollectionReusableView {
+    let titleLabel = UILabel(frame: .zero)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,18 +34,9 @@ class GifFooterCollectionReusableView: UICollectionReusableView {
         
         addSubview(titleLabel)
         titleLabel.layoutAttachAll(to: self)
-        addSubview(footerIndicatorView)
-        footerIndicatorView.layoutAttachAll(to: self)
-        
-        hideViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func hideViews() {
-        titleLabel.isHidden = true
-        footerIndicatorView.isHidden = true
     }
 }

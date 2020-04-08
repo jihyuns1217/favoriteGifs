@@ -48,6 +48,9 @@ class SearchResultViewController: UIViewController {
     
     // MARK: - Private Methods
     private func setupCollectionView() {
+        collectionView.register(IndicatorCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: IndicatorCollectionReusableView.reuseIdentifier)
+        collectionView.register(NoGifsCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: NoGifsCollectionReusableView.reuseIdentifier)
+        
         if let collectionViewLayout = collectionView.collectionViewLayout as? DynamicHeightCollectionViewLayout {
             collectionViewLayout.delegate = self
         }
@@ -191,18 +194,17 @@ extension SearchResultViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionFooter {
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: GifFooterCollectionReusableView.reuseIdentifier, for: indexPath) as! GifFooterCollectionReusableView
             
             if gifs.isEmpty {
-                if !searchText.isEmpty {
-                    footerView.titleLabel.isHidden = false
-                }
+                let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: NoGifsCollectionReusableView.reuseIdentifier, for: indexPath) as! NoGifsCollectionReusableView
+                footerView.titleLabel.isHidden = searchText.isEmpty
+                return footerView
             } else {
-                footerView.footerIndicatorView.isHidden = false
+                let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: IndicatorCollectionReusableView.reuseIdentifier, for: indexPath) as! IndicatorCollectionReusableView
                 footerIndicatorView = footerView.footerIndicatorView
+                return footerView
             }
             
-            return footerView
         }
         return UICollectionReusableView()
     }
