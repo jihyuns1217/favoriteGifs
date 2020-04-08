@@ -22,7 +22,7 @@ class SearchResultViewController: UIViewController {
     var isPaging = false
     var searchText: String = ""
     
-    var footerIndicatorView: UIActivityIndicatorView?
+    private var footerIndicatorView: UIActivityIndicatorView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
