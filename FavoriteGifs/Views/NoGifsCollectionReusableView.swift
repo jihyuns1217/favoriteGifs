@@ -1,5 +1,5 @@
 //
-//  GifFooterCollectionReusableView.swift
+//  NoGifsCollectionReusableView.swift
 //  FavoriteGifs
 //
 //  Created by Jihyun Son on 2020/04/08.
@@ -7,21 +7,6 @@
 //
 
 import UIKit
-
-class IndicatorCollectionReusableView: UICollectionReusableView {
-    let footerIndicatorView = UIActivityIndicatorView(style: .medium)
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        addSubview(footerIndicatorView)
-        footerIndicatorView.layoutAttachAll(to: self)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
 
 class NoGifsCollectionReusableView: UICollectionReusableView {
     let titleLabel = UILabel(frame: .zero)
