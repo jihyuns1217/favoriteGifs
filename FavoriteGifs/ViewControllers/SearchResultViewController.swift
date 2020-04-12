@@ -105,11 +105,7 @@ class SearchResultViewController: UIViewController {
             }
         }
         
-        Gif.gifs(query: searchText, offset: isPaging ? gifs.count : 0) { [weak self] (result) in
-            guard let self = self else {
-                return
-            }
-            
+        Gif.gifs(query: searchText, offset: isPaging ? gifs.count : 0) { (result) in
             defer {
                 DispatchQueue.main.async {
                     if !self.isPaging {
