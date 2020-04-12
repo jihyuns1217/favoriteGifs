@@ -53,6 +53,7 @@ class SearchResultViewController: UIViewController {
         
         if let collectionViewLayout = collectionView.collectionViewLayout as? DynamicHeightCollectionViewLayout {
             collectionViewLayout.delegate = self
+            collectionViewLayout.footerHeight = 50.0
         }
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -208,10 +209,6 @@ extension SearchResultViewController: UICollectionViewDataSource, UICollectionVi
 
 // MARK: - DynamicHeightCollectionViewLayout
 extension SearchResultViewController: DynamicHeightCollectionViewLayoutDelegate {
-    func collectionViewHeightForFooter(_ collectionView: UICollectionView) -> CGFloat {
-        return 50
-    }
-    
     func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
         let height = width * CGFloat(gifs[indexPath.item].aspectRatio)
         return height

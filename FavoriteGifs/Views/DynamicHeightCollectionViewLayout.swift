@@ -12,7 +12,6 @@ import UIKit
 
 protocol DynamicHeightCollectionViewLayoutDelegate: class {
     func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat
-    func collectionViewHeightForFooter(_ collectionView:UICollectionView) -> CGFloat
 }
 
 class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
@@ -30,7 +29,19 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
         }
     }
     
-    var columnWidth: CGFloat {
+    var horizontalSectionInset: CGFloat = 0.0 {
+           didSet {
+               invalidateLayout()
+           }
+       }
+    
+    var footerHeight: CGFloat = 0.0 {
+           didSet {
+               invalidateLayout()
+           }
+       }
+    
+    private var columnWidth: CGFloat {
         if numberOfColumns > 1 {
             let numberOfPaddingSections = numberOfColumns - 1
             
@@ -42,20 +53,18 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
         }
     }
     
-    var numberOfColumns: Int {
+    private var numberOfColumns: Int {
         return Int(floor(contentWidth / preferredCellWidth))
     }
     
-    var contentWidth: CGFloat {
+    private var contentWidth: CGFloat {
         let insets = collectionView!.contentInset
         return collectionView!.bounds.width - (insets.left + insets.right) - horizontalSectionInset * 2
     }
-    
-    var horizontalSectionInset: CGFloat = 0.0
         
     private var cellAttributeCache = [UICollectionViewLayoutAttributes]()
     
-    private(set) var contentHeight: CGFloat = 0.0
+    private var contentHeight: CGFloat = 0.0
     
     private var footerAttributes: UICollectionViewLayoutAttributes!
     
@@ -119,10 +128,6 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
         let sectionFooterAttributes = UICollectionViewLayoutAttributes(
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
           with: IndexPath(item: 1, section: 0))
-        
-        guard let footerHeight = delegate?.collectionViewHeightForFooter(collectionView) else {
-            return
-        }
         
         prepareElement(
             size: CGSize(width: contentWidth, height: footerHeight), attributes: sectionFooterAttributes)
