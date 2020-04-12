@@ -57,7 +57,10 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
     
     private var footerAttributes: UICollectionViewLayoutAttributes!
     
-    override public func prepare() {
+    override func prepare() {
+        super.prepare()
+        
+        guard let collectionView = collectionView else { return }
         
         if cellAttributeCache.isEmpty {
             contentHeight = padding
@@ -79,13 +82,13 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
                 yOffset[index] = contentHeight
             }
             
-            guard let numberOfItems = collectionView!.dataSource?.collectionView(collectionView!, numberOfItemsInSection: 0) else {
+            guard let numberOfItems = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: 0) else {
                 return
             }
             for item in 0..<numberOfItems {
                 let indexPath = IndexPath(item: item, section: 0)
                 
-                guard let cellHeight = delegate?.collectionView(collectionView: collectionView!, heightForPhotoAtIndexPath: indexPath, withWidth: columnWidth) else {
+                guard let cellHeight = delegate?.collectionView(collectionView: collectionView, heightForPhotoAtIndexPath: indexPath, withWidth: columnWidth) else {
                     continue
                 }
                 
@@ -115,7 +118,7 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
           with: IndexPath(item: 1, section: 0))
         
-        guard let footerHeight = delegate?.collectionViewHeightForFooter(collectionView!) else {
+        guard let footerHeight = delegate?.collectionViewHeightForFooter(collectionView) else {
             return
         }
         
