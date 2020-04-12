@@ -48,8 +48,10 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
     
     var contentWidth: CGFloat {
         let insets = collectionView!.contentInset
-        return collectionView!.bounds.width - (insets.left + insets.right)
+        return collectionView!.bounds.width - (insets.left + insets.right) - horizontalSectionInset * 2
     }
+    
+    var horizontalSectionInset: CGFloat = 0.0
         
     private var cellAttributeCache = [UICollectionViewLayoutAttributes]()
     
@@ -69,9 +71,9 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
             
             for column in 0..<numberOfColumns {
                 if column == 0 {
-                    xOffset.append((CGFloat(column) * columnWidth))
+                    xOffset.append((CGFloat(column) * columnWidth) + horizontalSectionInset)
                 } else {
-                    xOffset.append((CGFloat(column) * columnWidth) + (CGFloat(column) * padding))
+                    xOffset.append((CGFloat(column) * columnWidth) + (CGFloat(column) * padding) + horizontalSectionInset)
                 }
             }
             
