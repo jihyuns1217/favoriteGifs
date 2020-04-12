@@ -59,14 +59,12 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
     
     override public func prepare() {
         
-        if cellAttributeCache.isEmpty
-        {
+        if cellAttributeCache.isEmpty {
             contentHeight = padding
             
             var xOffset = [CGFloat]()
             
-            for column in 0..<numberOfColumns
-            {
+            for column in 0..<numberOfColumns {
                 if column == 0 {
                     xOffset.append((CGFloat(column) * columnWidth))
                 } else {
@@ -77,16 +75,14 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
             var column = 0
             var yOffset = [CGFloat](repeating: 0, count: numberOfColumns)
             
-            for index in 0..<numberOfColumns
-            {
+            for index in 0..<numberOfColumns {
                 yOffset[index] = contentHeight
             }
             
             guard let numberOfItems = collectionView!.dataSource?.collectionView(collectionView!, numberOfItemsInSection: 0) else {
                 return
             }
-            for item in 0..<numberOfItems
-            {
+            for item in 0..<numberOfItems {
                 let indexPath = IndexPath(item: item, section: 0)
                 
                 guard let cellHeight = delegate?.collectionView(collectionView: collectionView!, heightForPhotoAtIndexPath: indexPath, withWidth: columnWidth) else {
@@ -105,10 +101,8 @@ class DynamicHeightCollectionViewLayout: UICollectionViewLayout {
                 
                 var columnWithLeastHeight = 0
                 
-                for currentColumn in 0..<numberOfColumns
-                {
-                    if yOffset[currentColumn] < yOffset[columnWithLeastHeight]
-                    {
+                for currentColumn in 0..<numberOfColumns {
+                    if yOffset[currentColumn] < yOffset[columnWithLeastHeight] {
                         columnWithLeastHeight = currentColumn
                     }
                 }
